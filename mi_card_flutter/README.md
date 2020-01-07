@@ -15,7 +15,8 @@ Mi Card is a personal business card. Imagine every time you wanted to give someo
 * How to read and use Flutter Documentation
 
 
-![micard](images/micard.png)
+
+![image](images/micard.png " :size=600x440")
 
 
 >This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
