@@ -49,46 +49,51 @@ class Home extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Container(
+                Card(
                   color: Colors.white,
 //                  width: stageWidth * .75,
 
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
 //                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                        child: Icon(
-                          Icons.call,
-                          size: 24,
-                          color: Colors.blueAccent,
+//                  padding: EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          child: Icon(
+                            Icons.call,
+                            size: 24,
+                            color: Colors.blueAccent,
+                          ),
                         ),
-                      ),
-                      Text('+63 919 455 0938')
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.start,
+                        Text('+63 919 455 0938')
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.start,
+                    ),
                   ),
                 ),
-                Container(
+                Card(
                   color: Colors.white,
 //                  width: stageWidth * .75,
                   margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25),
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                        child: Icon(
-                          Icons.email,
-                          color: Colors.blue,
-                          size: 24,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          child: Icon(
+                            Icons.email,
+                            color: Colors.blue,
+                            size: 24,
+                          ),
                         ),
-                      ),
-                      Text('hello@dgtlmonk.dev')
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.start,
+                        Text('hello@dgtlmonk.dev')
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.start,
+                    ),
                   ),
                 )
               ],
