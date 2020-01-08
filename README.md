@@ -1,3 +1,3 @@
 # Flutter
 
-Familiarizing myself with Flutter through exercises ;)
+Flutter exercises :tada: :construction_worker: :beers:
