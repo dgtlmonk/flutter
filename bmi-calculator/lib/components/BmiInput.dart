@@ -17,9 +17,8 @@ class _BmiInputViewState extends State<BmiInputView> {
             children: <Widget>[
               Container(
                 child: Expanded(
-                  flex: 2,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Container(
                           child: Row(
@@ -33,7 +32,22 @@ class _BmiInputViewState extends State<BmiInputView> {
                                   color: Color(0xFF1C1E33),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                child: Text('Female'),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.beach_access,
+                                      size: 64,
+                                    ),
+                                    Text(
+                                      'FEMALE',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -46,19 +60,72 @@ class _BmiInputViewState extends State<BmiInputView> {
                                   color: Color(0xFF1C1E33),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                child: Text('Male'),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.beach_access,
+                                      size: 64,
+                                    ),
+                                    Text(
+                                      'MALE',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ],
                       )),
                       Container(
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              child: Expanded(
+                                child: Container(
+                                    padding: EdgeInsets.all(30),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          'HEIGHT',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 22,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                '183',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 60,
+                                                ),
+                                              ),
+                                              Text(
+                                                'cm',
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
                         margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
                         decoration: BoxDecoration(
                           color: Color(0xFF1C1E33),
-                        ),
-                        child: Row(
-                          children: <Widget>[Text('hey')],
                         ),
                       ),
                       Container(
