@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const double calcButtonHeight = 80;
 const uiCardBgColor = Color(0xFF1C1E33);
-const uiStatsBgColor = Color(0xFF0F1327);
 const uiGenderBgColor = Color(0xFF1C1E33);
 
 class BmiInputView extends StatefulWidget {
@@ -14,6 +13,8 @@ class BmiInputView extends StatefulWidget {
 }
 
 class _BmiInputViewState extends State<BmiInputView> {
+  String genderSelected = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,65 +28,45 @@ class _BmiInputViewState extends State<BmiInputView> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: UiCardButton(
-                        icon: FontAwesomeIcons.mars,
-                        color: uiCardBgColor,
-                        label: 'MALE',
-                        isActive: true,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            genderSelected = 'male';
+                          });
+                        },
+                        child: UiCardButton(
+                          icon: FontAwesomeIcons.mars,
+                          isActive: genderSelected == 'male',
+                          label: 'MALE',
+                        ),
                       ),
                     ),
                     Expanded(
-                      child: UiCardButton(
-                        icon: FontAwesomeIcons.venus,
-                        label: 'FEMALE',
-                        color: uiCardBgColor,
-                        isActive: false,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            genderSelected = 'female';
+                          });
+                        },
+                        child: UiCardButton(
+                          icon: FontAwesomeIcons.venus,
+                          label: 'FEMALE',
+                          isActive: genderSelected == 'female',
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
               Expanded(
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: uiCardBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'HEIGHT',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 22,
-                        ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: UiCard(
+                        color: uiCardBgColor,
                       ),
-                      Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              '183',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 60,
-                              ),
-                            ),
-                            Text(
-                              'cm',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
 

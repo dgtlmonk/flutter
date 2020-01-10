@@ -1,11 +1,13 @@
 import 'package:bmi_calculator/components/UiCard.dart';
 import 'package:flutter/material.dart';
 
+const inactiveBgColor = Color(0xFF0F1327);
+const activeBgColor = Color(0xFF1D1E33);
+
 class UiCardButton extends StatelessWidget {
-  UiCardButton({this.color, this.label, this.icon, this.isActive});
+  UiCardButton({this.label, this.icon, this.isActive});
 
   final String label;
-  final Color color;
   final IconData icon;
   final bool isActive;
 
@@ -15,7 +17,7 @@ class UiCardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UiCard(
-      color: color,
+      color: isActive ? activeBgColor : inactiveBgColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
