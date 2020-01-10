@@ -1,4 +1,12 @@
+import 'package:bmi_calculator/components/UiCard.dart';
+import 'package:bmi_calculator/components/UiCardButton.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+const double calcButtonHeight = 80;
+const uiCardBgColor = Color(0xFF1C1E33);
+const uiStatsBgColor = Color(0xFF0F1327);
+const uiGenderBgColor = Color(0xFF1C1E33);
 
 class BmiInputView extends StatefulWidget {
   @override
@@ -18,54 +26,20 @@ class _BmiInputViewState extends State<BmiInputView> {
               Expanded(
                 child: Row(
                   children: <Widget>[
-                    Container(
-                      child: Expanded(
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF1C1E33),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Icon(
-                                Icons.beach_access,
-                                size: 64,
-                              ),
-                              Text(
-                                'FEMALE',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
+                    Expanded(
+                      child: UiCardButton(
+                        icon: FontAwesomeIcons.mars,
+                        color: uiCardBgColor,
+                        label: 'MALE',
+                        isActive: true,
                       ),
                     ),
-                    Container(
-                      child: Expanded(
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF1C1E33),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Icon(
-                                Icons.beach_access,
-                                size: 64,
-                              ),
-                              Text(
-                                'MALE',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
+                    Expanded(
+                      child: UiCardButton(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
+                        color: uiCardBgColor,
+                        isActive: false,
                       ),
                     ),
                   ],
@@ -73,11 +47,11 @@ class _BmiInputViewState extends State<BmiInputView> {
               ),
               Expanded(
                 child: Container(
+                  margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Color(0xFF1C1E33),
+                    color: uiCardBgColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  margin: EdgeInsets.all(10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -114,86 +88,47 @@ class _BmiInputViewState extends State<BmiInputView> {
                   ),
                 ),
               ),
+
+              // Bottom Inputs
               Expanded(
                 child: Row(
                   children: <Widget>[
-                    Container(
-                      child: Expanded(
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF1C1E33),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Icon(
-                                Icons.beach_access,
-                                size: 64,
-                              ),
-                              Text(
-                                'FEMALE',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    Expanded(
+                      child: UiCard(color: uiCardBgColor),
                     ),
                     Container(
                       child: Expanded(
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF1C1E33),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Icon(
-                                Icons.beach_access,
-                                size: 64,
-                              ),
-                              Text(
-                                'MALE',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                          child: UiCard(
+                        color: uiCardBgColor,
+                      )),
                     ),
                   ],
                 ),
               ),
               Container(
-                child: Container(
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
+                color: Color(0xFFEA1456),
+                width: double.infinity,
+                height: calcButtonHeight,
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: FlatButton(
+                        onPressed: () {},
                         child: Container(
-                          color: Color(0xFFEA1456),
-                          child: Container(
-                            child: FlatButton(
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
-                                child: Text(
-                                  'CALCULATE YOUR BMI',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
+                          padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
+                          child: Text(
+                            'CALCULATE YOUR BMI',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                                fontSize: 20),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               )
             ],
