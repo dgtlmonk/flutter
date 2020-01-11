@@ -1,9 +1,8 @@
 import 'package:bmi_calculator/components/UICardStepper.dart';
+import 'package:bmi_calculator/components/UIGenderSelectorCard.dart';
 import 'package:bmi_calculator/components/UiCard.dart';
-import 'package:bmi_calculator/components/UiCardButton.dart';
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BmiInputView extends StatefulWidget {
   @override
@@ -26,6 +25,7 @@ class _BmiInputViewState extends State<BmiInputView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              // Gender Card
               Expanded(
                 child: Row(
                   children: <Widget>[
@@ -53,7 +53,7 @@ class _BmiInputViewState extends State<BmiInputView> {
                 ),
               ),
 
-              // Slider
+              // Height Slider
               Expanded(
                 child: UiCard(
                   color: kUICardBgColor,
@@ -110,7 +110,7 @@ class _BmiInputViewState extends State<BmiInputView> {
                 ),
               ),
 
-              // Bottom Inputs
+              // Weight/Age Stepper input
               Expanded(
                 child: Row(
                   children: <Widget>[
@@ -181,25 +181,5 @@ class _BmiInputViewState extends State<BmiInputView> {
             ],
           ),
         ));
-  }
-}
-
-class GenderSelectorCard extends StatelessWidget {
-  GenderSelectorCard({this.gender, this.isActive, this.onTap});
-
-  final Gender gender;
-  final bool isActive;
-  final Function onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return UiCardButton(
-      icon: gender == Gender.male
-          ? FontAwesomeIcons.mars
-          : FontAwesomeIcons.venus,
-      isActive: isActive,
-      label: gender == Gender.male ? 'MALE' : 'FEMALE',
-      onTap: () => onTap(),
-    );
   }
 }
