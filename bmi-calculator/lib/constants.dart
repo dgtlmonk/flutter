@@ -6,11 +6,12 @@ const kUIGenderBgColor = Color(0xFF1C1E33);
 
 const double kMinHeight = 120.0;
 const double kMaxHeight = 280.0;
-
 const int kMinAge = 12;
 const int kMaxAge = 120;
+const int kMinWeight = 120;
 
-const double kMinWeight = 120;
+enum Gender { male, female }
+enum Operation { increment, decrement }
 
 const kInputValueTextStyle = TextStyle(
   fontWeight: FontWeight.w900,

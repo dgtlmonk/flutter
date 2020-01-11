@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RoundedIconButton extends StatelessWidget {
-  RoundedIconButton({this.icon});
+  RoundedIconButton({this.icon, this.onTap});
 
   final IconData icon;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () => onTap(),
       child: RawMaterialButton(
         child: Icon(
           icon,
