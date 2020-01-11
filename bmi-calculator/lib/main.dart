@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/components/BmiInput.dart';
 import 'package:flutter/material.dart';
 
+// TODO: add an option to switch units (e.g. cm > ft, lbs > kg)
 void main() => runApp(BMICalculator());
 
 class BMICalculator extends StatelessWidget {

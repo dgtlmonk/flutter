@@ -1,5 +1,6 @@
+import 'package:bmi_calculator/components/UIRoundedButton.dart';
 import 'package:bmi_calculator/components/UiCard.dart';
-import 'package:bmi_calculator/components/UiGenderButton.dart';
+import 'package:bmi_calculator/components/UiCardButton.dart';
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -57,7 +58,7 @@ class _BmiInputViewState extends State<BmiInputView> {
               // Slider
               Expanded(
                   child: UiCard(
-                color: uiCardBgColor,
+                color: kUICardBgColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -75,17 +76,11 @@ class _BmiInputViewState extends State<BmiInputView> {
                       children: <Widget>[
                         Text(
                           height.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 50,
-                          ),
+                          style: kInputValueTextStyle,
                         ),
                         Text(
                           'cm',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16.0,
-                          ),
+                          style: kInputLabelTextStyle,
                         ),
                       ],
                     ),
@@ -102,8 +97,8 @@ class _BmiInputViewState extends State<BmiInputView> {
                       ),
                       child: Slider(
 //                        activeColor: Color(0xFFEB1555),
-                        min: 120.0,
-                        max: 250.0,
+                        min: kMinHeight,
+                        max: kMaxHeight,
                         value: height.toDouble(),
                         onChanged: (double val) {
                           setState(() {
@@ -121,12 +116,74 @@ class _BmiInputViewState extends State<BmiInputView> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: UiCard(color: uiCardBgColor),
+                      child: UiCard(
+                        color: kUICardBgColor,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'WEIGHT',
+                              style: kInputLabelTextStyle,
+                            ),
+                            Text(
+                              '74',
+                              style: kInputValueTextStyle,
+                            ),
+                            SizedBox(
+                              height: 8.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(right: 10.0),
+                                  child: RoundedIconButton(
+                                    icon: FontAwesomeIcons.plus,
+                                  ),
+                                ),
+                                RoundedIconButton(
+                                  icon: FontAwesomeIcons.minus,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                     Container(
                       child: Expanded(
                           child: UiCard(
-                        color: uiCardBgColor,
+                        color: kUICardBgColor,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'AGE',
+                              style: kInputLabelTextStyle,
+                            ),
+                            Text(
+                              '19',
+                              style: kInputValueTextStyle,
+                            ),
+                            SizedBox(
+                              height: 8.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(right: 10.0),
+                                  child: RoundedIconButton(
+                                    icon: FontAwesomeIcons.plus,
+                                  ),
+                                ),
+                                RoundedIconButton(
+                                  icon: FontAwesomeIcons.minus,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       )),
                     ),
                   ],
@@ -135,7 +192,7 @@ class _BmiInputViewState extends State<BmiInputView> {
               Container(
                 color: Color(0xFFEA1456),
                 width: double.infinity,
-                height: kcalcButtonHeight,
+                height: kCalcButtonHeight,
                 margin: EdgeInsets.only(top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
