@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/components/UiCard.dart';
+import 'package:bmi_calculator/components/UICard.dart';
 import 'package:flutter/material.dart';
 
 const inactiveBgColor = Color(0xFF0F1327);

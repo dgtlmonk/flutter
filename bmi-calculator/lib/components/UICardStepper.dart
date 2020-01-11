@@ -1,5 +1,5 @@
+import 'package:bmi_calculator/components/UICard.dart';
 import 'package:bmi_calculator/components/UIRoundedButton.dart';
-import 'package:bmi_calculator/components/UiCard.dart';
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

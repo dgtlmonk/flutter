@@ -1,6 +1,6 @@
+import 'package:bmi_calculator/components/UICard.dart';
 import 'package:bmi_calculator/components/UICardStepper.dart';
 import 'package:bmi_calculator/components/UIGenderSelectorCard.dart';
-import 'package:bmi_calculator/components/UiCard.dart';
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
