@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/components/BMIResult.dart';
 import 'package:bmi_calculator/components/UICard.dart';
 import 'package:bmi_calculator/components/UICardStepper.dart';
 import 'package:bmi_calculator/components/UIGenderSelectorCard.dart';
@@ -121,11 +122,11 @@ class _BmiInputViewState extends State<BmiInputView> {
                           onChange: (Operation op) {
                             if (Operation.increment == op) {
                               setState(() {
-                                userWeightInLbs = userWeightInLbs + 1;
+                                userWeightInLbs++;
                               });
                             } else {
                               setState(() {
-                                userWeightInLbs = userWeightInLbs - 1;
+                                userWeightInLbs--;
                               });
                             }
                           }),
@@ -137,11 +138,11 @@ class _BmiInputViewState extends State<BmiInputView> {
                         onChange: (Operation op) {
                           if (Operation.increment == op) {
                             setState(() {
-                              userAge = userAge + 1;
+                              userAge++;
                             });
                           } else {
                             setState(() {
-                              userAge = userAge - 1;
+                              userAge--;
                             });
                           }
                         },
@@ -162,7 +163,14 @@ class _BmiInputViewState extends State<BmiInputView> {
                   children: <Widget>[
                     Container(
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BMIResult(),
+                            ),
+                          );
+                        },
                         child: Container(
                           padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
                           child: Text(
