@@ -33,12 +33,17 @@ class BmiResultView extends StatelessWidget {
                         Expanded(
                           child: UiCard(
                             color: kUICardBgColor,
-                            child: Text(
-                              'NORMAL',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 20,
-                              ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'NORMAL',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         )
@@ -48,6 +53,8 @@ class BmiResultView extends StatelessWidget {
                 ],
               ),
             ),
+
+            // Reset
             Container(
               color: Color(0xFFEA1456),
               width: double.infinity,
@@ -64,7 +71,7 @@ class BmiResultView extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
                         child: Text(
-                          'CALCULATE YOUR BMI',
+                          'RE-CALCULATE YOUR BMI',
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
                               color: Colors.white,

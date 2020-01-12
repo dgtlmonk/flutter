@@ -167,7 +167,7 @@ class _BmiInputViewState extends State<BmiInputView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => BMIResult(),
+                              builder: (context) => BmiResultView(),
                             ),
                           );
                         },
