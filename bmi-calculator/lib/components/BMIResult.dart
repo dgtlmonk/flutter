@@ -41,7 +41,7 @@ class BmiResultView extends StatelessWidget {
                           child: UiCard(
                             color: kUICardBgColor,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 Text(
                                   status,
@@ -51,15 +51,19 @@ class BmiResultView extends StatelessWidget {
                                     color: Color(0xFF23BC6C),
                                   ),
                                 ),
-                                Text(
-                                  bmi,
-                                  style: TextStyle(
-                                    fontSize: 90.0,
-                                    fontWeight: FontWeight.w900,
-                                  ),
+                                Column(
+                                  children: <Widget>[
+                                    Text(
+                                      bmi,
+                                      style: TextStyle(
+                                        fontSize: 90.0,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    Text('Normal BMI range:'),
+                                    Text('18.5 - 25 kg/m2'),
+                                  ],
                                 ),
-                                Text('Normal BMI range:'),
-                                Text('18,5 - 25 kg/m2'),
                                 SizedBox(
                                   height: 10,
                                 ),
