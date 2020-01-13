@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/bmi_calculator.dart';
 import 'package:bmi_calculator/components/BMIResult.dart';
 import 'package:bmi_calculator/components/UICard.dart';
 import 'package:bmi_calculator/components/UICardStepper.dart';
@@ -13,7 +14,7 @@ class BmiInputView extends StatefulWidget {
 class _BmiInputViewState extends State<BmiInputView> {
   Gender genderSelected;
   int userHeightInCm = 180;
-  int userWeightInLbs = kMinWeight;
+  int userWeightInKg = kMinWeight;
   int userAge = kMinAge;
 
   @override
@@ -118,15 +119,15 @@ class _BmiInputViewState extends State<BmiInputView> {
                     Expanded(
                       child: UICardStepperInput(
                           label: 'WEIGHT',
-                          value: userWeightInLbs,
+                          value: userWeightInKg,
                           onChange: (Operation op) {
                             if (Operation.increment == op) {
                               setState(() {
-                                userWeightInLbs++;
+                                userWeightInKg++;
                               });
                             } else {
                               setState(() {
-                                userWeightInLbs--;
+                                userWeightInKg--;
                               });
                             }
                           }),
@@ -164,10 +165,19 @@ class _BmiInputViewState extends State<BmiInputView> {
                     Container(
                       child: FlatButton(
                         onPressed: () {
+                          BmiCalculator bmi = BmiCalculator(
+                            weight: userWeightInKg,
+                            height: userHeightInCm,
+                          );
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => BmiResultView(),
+                              builder: (context) => BmiResultView(
+                                bmi: bmi.calculateBmi(),
+                                status: bmi.getResult()['status'],
+                                statusText: bmi.getResult()['text'],
+                              ),
                             ),
                           );
                         },

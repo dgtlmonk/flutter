@@ -3,6 +3,13 @@ import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
 class BmiResultView extends StatelessWidget {
+  BmiResultView(
+      {@required this.bmi, @required this.status, @required this.statusText});
+
+  final String bmi;
+  final String status;
+  final String statusText;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +44,35 @@ class BmiResultView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  'NORMAL',
+                                  status,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w900,
                                     fontSize: 20,
+                                    color: Color(0xFF23BC6C),
+                                  ),
+                                ),
+                                Text(
+                                  bmi,
+                                  style: TextStyle(
+                                    fontSize: 90.0,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                Text('Normal BMI range:'),
+                                Text('18,5 - 25 kg/m2'),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: Text(
+                                    statusText,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF23BC6C),
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -75,7 +107,7 @@ class BmiResultView extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
-                              fontSize: 20),
+                              fontSize: 12),
                         ),
                       ),
                     ),
