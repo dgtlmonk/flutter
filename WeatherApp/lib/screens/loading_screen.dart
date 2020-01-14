@@ -20,12 +20,26 @@ Future<http.Response> _fetchPost() async {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  Future _verifyLocationAccess() async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+
+    return position;
+  }
+
+  void _openPermissionSettings() {
+    PermissionHandler().openAppSettings();
+  }
+
   void _checkLocationPermission() async {
     PermissionStatus locationPermission = await PermissionHandler()
         .checkPermissionStatus(PermissionGroup.locationWhenInUse);
 
+    print('location permission ' + locationPermission.toString());
+
     if (locationPermission != PermissionStatus.granted) {
-      PermissionHandler().openAppSettings();
+      print('location permision is not granted?');
+      _openPermissionSettings();
       //    await PermissionHandler()
       //        .requestPermissions([PermissionGroup.locationWhenInUse]);
 
@@ -36,10 +50,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
   }
 
-  void _openPermissionSettings() {
-    PermissionHandler().openAppSettings();
-  }
-
   Future _getData() async {
     print('getting data ...');
 
@@ -48,18 +58,25 @@ class _LoadingScreenState extends State<LoadingScreen> {
     http.Response response = await http.get(url);
     print('----');
 
-    return response;
+    return {
+      'response': response,
+      'statusCode': response.statusCode,
+    };
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _checkLocationPermission();
-    _getData().then((value) {
-      print(value);
+
+    _verifyLocationAccess().whenComplete(() {
+      _getData().then((response) {
+        print(response);
+      }).catchError((e) {
+        print('something went wrong');
+      });
+    }).catchError((e) {
+      _checkLocationPermission();
     });
-    _openPermissionSettings();
   }
 
   @override
