@@ -8,9 +8,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Color(0xFFD9E7FE),
+        scaffoldBackgroundColor: Color(0xFFDEE7EF), //Color(0xFFD9E7FE),
       ),
-      home: LoadingScreen(),
+      home: SafeArea(
+        child: LoadingScreen(),
+      ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
