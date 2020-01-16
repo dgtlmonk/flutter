@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 
+// TODO
 const Color gray = Color(0xFFDEE7EF);
 const Color lightBlue = Color(0xFFD9E7FE);
 const Color lightBlue2 = Color(0xFFF2F8FF);
@@ -83,116 +84,163 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
-          Container(
-            // TODO: make y transform dynamic
-            transform: Matrix4.translationValues(0.0, -34.0, 0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 30.0,
-                      top: 20.0,
-                      bottom: 40.0,
-                    ),
-                    decoration: new BoxDecoration(
-                      color: lightBlue,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40.0),
-                      ),
-                    ),
-                    child: Text(
-                      'Weather',
-                      style: TextStyle(
-                        fontSize: 42,
-                        fontWeight: FontWeight.w800,
-                        color: lightViolet,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  transform: Matrix4.translationValues(0.0, 36.0, 10.0),
-                  decoration: new BoxDecoration(
-                    color: lightBlue2,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(40.0),
-                    ),
-                  ),
-                  padding: EdgeInsets.only(
-                    top: 20,
-                    bottom: 30.0,
-                    right: 24,
-                    left: 24.0,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.ellipsisV,
-                        size: iconSize,
-                        color: lightViolet,
-                      ),
-                      SizedBox(height: 40.0),
-                      Icon(
-                        FontAwesomeIcons.star,
-                        color: lightViolet,
-                        size: iconSize,
-                      ),
-                      SizedBox(height: 40.0),
-                      Icon(
-                        FontAwesomeIcons.share,
-                        color: lightViolet,
-                        size: iconSize,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: <Widget>[
-                // location rounded button
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+          BackgroundWidget(),
+          Column(
+//        crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                // TODO: make y transform dynamic
+                child: Row(
                   children: <Widget>[
-                    Container(
-                      transform: Matrix4.translationValues(-6.0, -90.0, 0.0),
-                      padding: EdgeInsets.only(
-                          left: 20.0, top: 20.0, right: 40, bottom: 20),
-                      margin: EdgeInsets.only(right: 54.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(28.0),
-                          bottomRight: Radius.circular(30.0),
-                          topRight: Radius.circular(30.0),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 8.0,
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.chevron_left),
-                          SizedBox(
-                            width: 10.0,
+                    Expanded(
+                      child: Opacity(
+                        opacity: 0.6,
+                        child: Container(
+                          transform: Matrix4.translationValues(0.0, -38.0, 0),
+                          padding: EdgeInsets.only(
+                            left: 30.0,
+                            top: 20.0,
+                            bottom: 40.0,
                           ),
-                          Text(
-                            'St. Petersburg',
+                          decoration: new BoxDecoration(
+                            color: lightBlue,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(40.0),
+                            ),
+                          ),
+                          child: Text(
+                            'Weather',
                             style: TextStyle(
+                              fontSize: 42,
                               fontWeight: FontWeight.w800,
-                              color: darkGray,
-                              fontSize: 18.0,
+                              color: lightViolet,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Opacity(
+                      opacity: 0.6,
+                      child: Container(
+                        decoration: new BoxDecoration(
+                          color: lightBlue2,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(40.0),
+                          ),
+                        ),
+                        padding: EdgeInsets.only(
+                          top: 20,
+                          bottom: 30.0,
+                          right: 24,
+                          left: 24.0,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Icon(
+                              FontAwesomeIcons.ellipsisV,
+                              size: iconSize,
+                              color: lightViolet,
+                            ),
+                            SizedBox(height: 40.0),
+                            Icon(
+                              FontAwesomeIcons.star,
+                              color: lightViolet,
+                              size: iconSize,
+                            ),
+                            SizedBox(height: 40.0),
+                            Icon(
+                              FontAwesomeIcons.share,
+                              color: lightViolet,
+                              size: iconSize,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    // location rounded button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          transform:
+                              Matrix4.translationValues(-6.0, -90.0, 0.0),
+                          padding: EdgeInsets.only(
+                              left: 20.0, top: 20.0, right: 40, bottom: 20),
+                          margin: EdgeInsets.only(right: 54.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(28.0),
+                              bottomRight: Radius.circular(30.0),
+                              topRight: Radius.circular(30.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 12.0,
+                              )
+                            ],
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.chevron_left),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              Text(
+                                'St. Petersburg',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: darkGray,
+                                  fontSize: 18.0,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    // temp display
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Expanded(
+                            child: Opacity(
+                              opacity: 0.4,
+                              child: Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 30.0,
+                                  ),
+                                  Text(
+                                    '+3',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 120.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    'cloudy',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 24.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         ],
@@ -200,22 +248,31 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     ),
                   ],
                 ),
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text('+3'),
-                          Text('cloudy'),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BackgroundWidget extends StatelessWidget {
+  const BackgroundWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: 0.5,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/cloudy.jpeg'),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }
