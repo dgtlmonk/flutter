@@ -86,72 +86,87 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Column(
 //        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(
-                    left: 30.0,
-                    top: 20.0,
-                    bottom: 40.0,
+          Container(
+            // TODO: make y transform dynamic
+            transform: Matrix4.translationValues(0.0, -34.0, 0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      left: 30.0,
+                      top: 20.0,
+                      bottom: 40.0,
+                    ),
+                    decoration: new BoxDecoration(
+                      color: lightBlue,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(40.0),
+                      ),
+                    ),
+                    child: Text(
+                      'Weather',
+                      style: TextStyle(
+                        fontSize: 42,
+                        fontWeight: FontWeight.w800,
+                        color: lightViolet,
+                      ),
+                    ),
                   ),
+                ),
+                Container(
+                  transform: Matrix4.translationValues(0.0, 36.0, 10.0),
                   decoration: new BoxDecoration(
-                    color: lightBlue,
+                    color: lightBlue2,
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(40.0),
                     ),
                   ),
-                  child: Text(
-                    'Weather',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w800,
-                      color: lightViolet,
-                    ),
+                  padding: EdgeInsets.only(
+                    top: 20,
+                    bottom: 30.0,
+                    right: 24,
+                    left: 24.0,
                   ),
-                ),
-              ),
-              Container(
-                transform: Matrix4.translationValues(0.0, 0.0, 10.0),
-                decoration: new BoxDecoration(
-                  color: lightBlue2,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(40.0),
+                  child: Column(
+                    children: <Widget>[
+                      Icon(
+                        FontAwesomeIcons.ellipsisV,
+                        size: iconSize,
+                        color: lightViolet,
+                      ),
+                      SizedBox(height: 40.0),
+                      Icon(
+                        FontAwesomeIcons.star,
+                        color: lightViolet,
+                        size: iconSize,
+                      ),
+                      SizedBox(height: 40.0),
+                      Icon(
+                        FontAwesomeIcons.share,
+                        color: lightViolet,
+                        size: iconSize,
+                      ),
+                    ],
                   ),
-                ),
-                padding: EdgeInsets.only(
-                    top: 20, bottom: 30.0, right: 20, left: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    Icon(
-                      FontAwesomeIcons.ellipsisV,
-                      size: iconSize,
-                      color: lightViolet,
-                    ),
-                    SizedBox(height: 20.0),
-                    Icon(
-                      FontAwesomeIcons.star,
-                      color: lightViolet,
-                      size: iconSize,
-                    ),
-                  ],
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
           Expanded(
             child: Column(
               children: <Widget>[
                 // location rounded button
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Container(
-                      transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+                      transform: Matrix4.translationValues(-6.0, -90.0, 0.0),
                       padding: EdgeInsets.only(
                           left: 20.0, top: 20.0, right: 40, bottom: 20),
-                      margin: EdgeInsets.only(left: 30.0),
+                      margin: EdgeInsets.only(right: 54.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -159,6 +174,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
                           bottomRight: Radius.circular(30.0),
                           topRight: Radius.circular(30.0),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 8.0,
+                          )
+                        ],
                       ),
                       child: Row(
                         children: <Widget>[
