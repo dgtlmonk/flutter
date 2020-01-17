@@ -27,14 +27,6 @@ flutter:
   - images/
 
   fonts:
-  - family: RainyIcon
-    fonts:
-    - asset: fonts/RainyIcon.ttf
-      weight: 900
-  - family: CloudyIcon
-    fonts:
-      - asset: fonts/CloudyIcon.ttf
-        weight: 900
   - family: Meteocons
     fonts:
       - asset: fonts/Meteocons.ttf
