@@ -16,7 +16,6 @@ dependencies:
   http: ^0.12.0+2
   font_awesome_flutter: ^8.5.0
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -28,7 +27,16 @@ flutter:
   - images/
 
   fonts:
-  - family: Spartan MB
+  - family: RainyIcon
     fonts:
-    - asset: fonts/SpartanMB-Black.otf
+    - asset: fonts/RainyIcon.ttf
       weight: 900
+  - family: CloudyIcon
+    fonts:
+      - asset: fonts/CloudyIcon.ttf
+        weight: 900
+  - family: Meteocons
+    fonts:
+      - asset: fonts/Meteocons.ttf
+        weight: 900
+

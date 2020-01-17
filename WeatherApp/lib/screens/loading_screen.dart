@@ -1,19 +1,32 @@
+import 'package:clima/icons/meteocons_icons.dart';
+import 'package:clima/services/api_client.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 
-// TODO
+// TODO put in const file
 const Color gray = Color(0xFFDEE7EF);
 const Color lightBlue = Color(0xFFD9E7FE);
 const Color lightBlue2 = Color(0xFFF2F8FF);
 const Color lightViolet = Color(0xFF535A92);
 const Color darkGray = Color(0xFF8287AC);
 
-//TODO: move somewhere else
-
+final kAPIKey = "6edc6e89401d98df25b6ea5d5c81e85b";
 final iconSize = 18.0;
+
+// TODO: Unit option
+// farenheit = units=imperial
+// celcius = units=metric
+
+String _constructUrl({String lon, String lat}) {
+  return "https://api.openweathermap.org/data/2.5/weather?lat=" +
+      lat +
+      "&lon=" +
+      lon +
+      "&units=metric" +
+      "&appid=6edc6e89401d98df25b6ea5d5c81e85b";
+}
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -21,6 +34,11 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double latitude;
+  double longitude;
+  String temperature;
+  String weatherDescription;
+
   Future<Position> _verifyLocationAccess() async {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
@@ -51,17 +69,34 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
   }
 
-  Future<Map> _updateWeather() async {
-    print('getting data ...');
-    final url =
-        "https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22";
-    http.Response response = await http.get(url);
-    print('----');
+  Future _fetchWeatherData() async {
+    WeatherApiClient weatherApi = WeatherApiClient(
+      url: _constructUrl(
+        lon: longitude.toString(),
+        lat: latitude.toString(),
+      ),
+    );
 
-    return {
-      'response': response,
-      'statusCode': response.statusCode,
-    };
+    try {
+      Map res = await weatherApi.fetchWeatherUpdates();
+
+      if (res['statusCode'] == 200) {
+//        print('response ' + res.toString());
+//        print(res['data']['weather'][0]['description']);
+
+        print('temperature ' + res['data']['main']['temp'].toString());
+        setState(() {
+          weatherDescription = res['data']['weather'][0]['description'];
+          temperature = res['data']['main']['temp'].round().toString();
+        });
+      } else {
+        setState(() {
+          weatherDescription = 'unable to connect';
+        });
+      }
+    } catch (e) {
+      print('something went wrong');
+    }
   }
 
   @override
@@ -69,13 +104,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
 
     _verifyLocationAccess().then((position) {
-      print('position ' + position.toString());
-    }).whenComplete(() {
-      _updateWeather().then((response) {
-        print(response);
-      }).catchError((e) {
-        print('something went wrong');
+      latitude = position.latitude;
+      longitude = position.longitude;
+
+      print("long " + longitude.toString() + " lat " + latitude.toString());
+      setState(() {
+        latitude = position.latitude;
+        longitude = position.longitude;
       });
+
+      _fetchWeatherData();
+    }).whenComplete(() {
+      // do something else .... tb
     }).catchError((e) {
       _checkLocationPermission();
     });
@@ -89,10 +129,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
         children: <Widget>[
           BackgroundWidget(),
           Column(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                // TODO: make y transform dynamic
                 child: Row(
                   children: <Widget>[
                     Expanded(
@@ -170,14 +208,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   children: <Widget>[
                     // location rounded button
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+//                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Container(
                           transform:
                               Matrix4.translationValues(-6.0, -90.0, 0.0),
                           padding: EdgeInsets.only(
                               left: 20.0, top: 20.0, right: 40, bottom: 20),
-                          margin: EdgeInsets.only(right: 54.0),
+                          // TODO: make auto compute
+                          margin: EdgeInsets.only(left: 20.0),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
@@ -194,12 +233,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
                           ),
                           child: Row(
                             children: <Widget>[
-                              Icon(Icons.chevron_left),
+                              Icon(
+                                Icons.location_on,
+                                color: darkGray,
+                              ),
                               SizedBox(
                                 width: 10.0,
                               ),
                               Text(
-                                'St. Petersburg',
+                                'Pasig, Shaw Blvd',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   color: darkGray,
@@ -218,31 +260,175 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Expanded(
-                            child: Opacity(
-                              opacity: 0.4,
                               child: Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 30.0,
-                                  ),
-                                  Text(
-                                    '+3',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 120.0,
+                            children: <Widget>[
+                              Opacity(
+                                opacity: 0.5,
+                                child: Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 30.0,
                                     ),
-                                  ),
-                                  Text(
-                                    'cloudy',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 24.0,
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          temperature ?? '--',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 90.0,
+                                            color: lightViolet,
+                                          ),
+                                        ),
+                                        Text(
+                                          '°F',
+                                          style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        )
+                                      ],
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                     ),
-                                  ),
-                                ],
+                                    Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Meteocons.snow_heavy,
+                                          size: 32.0,
+                                        ),
+                                        SizedBox(height: 10.0),
+                                        Text(
+                                          weatherDescription ?? '--',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 18.0,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
+
+                              // Bottom Status
+                              Expanded(
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                              'NIGHT',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w900,
+                                                color: lightViolet,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  '23° ',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                                Icon(Meteocons.snow_heavy),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                              'MORN',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w900,
+                                                color: lightViolet,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  '23° ',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                                Icon(Meteocons.windy_rain),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                              'NOON',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w900,
+                                                color: lightViolet,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  '23° ',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                                Icon(Meteocons.rain),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                              'EVE',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w900,
+                                                color: lightViolet,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  '23° ',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                                Icon(Meteocons.cloud_flash),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20.0,
+                                    )
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                ),
+                              )
+                            ],
+                          )),
                         ],
                       ),
                     ),
