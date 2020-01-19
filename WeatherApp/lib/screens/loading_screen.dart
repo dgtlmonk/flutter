@@ -1,6 +1,7 @@
 import 'package:clima/icons/meteocons_icons.dart';
 import 'package:clima/model/Weather.dart';
-import 'package:clima/services/api_client.dart';
+import 'package:clima/services/®weather_client.dart';
+import 'package:clima/widgets/Background.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -428,27 +429,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class BackgroundWidget extends StatelessWidget {
-  const BackgroundWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Opacity(
-      opacity: 0.5,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/cloudy.jpeg'),
-            fit: BoxFit.cover,
-          ),
-        ),
       ),
     );
   }

@@ -24,9 +24,9 @@ class WeatherApiClient {
 
     Response response = await get(this.url);
 
-    var decodedJson = json.decode(response.body); //.cast<String, dynamic>();
-    var _weather = decodedJson['weather'].cast<Map<String, dynamic>>()[0];
-    var _main = decodedJson['main'];
+    var _json = json.decode(response.body).cast<String, dynamic>();
+    var _weather = _json['weather'].cast<Map<String, dynamic>>()[0];
+    var _main = _json['main'];
 
     if (response.statusCode == 200) {
       return Weather.fromMap({
@@ -36,7 +36,7 @@ class WeatherApiClient {
     }
 
     return Weather.fromMap(
-      {'description': 'failed to connect', 'temperature': '--'},
+      {'description': 'failed to connect.', 'temperature': '--'},
     );
   }
 
