@@ -1,4 +1,5 @@
 import 'package:clima/icons/meteocons_icons.dart';
+import 'package:clima/model/Weather.dart';
 import 'package:clima/services/api_client.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -78,22 +79,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
 
     try {
-      Map res = await weatherApi.fetchWeatherUpdates();
-
-      if (res['statusCode'] == 200) {
-//        print('response ' + res.toString());
-//        print(res['data']['weather'][0]['description']);
-
-        print('temperature ' + res['data']['main']['temp'].toString());
-        setState(() {
-          weatherDescription = res['data']['weather'][0]['description'];
-          temperature = res['data']['main']['temp'].round().toString();
-        });
-      } else {
-        setState(() {
-          weatherDescription = 'unable to connect';
-        });
-      }
+      Weather weather = await weatherApi.fetchWeatherUpdates();
+      setState(() {
+        weatherDescription = weather.description;
+        temperature = weather.temperature.toString();
+      });
     } catch (e) {
       print('something went wrong');
     }
