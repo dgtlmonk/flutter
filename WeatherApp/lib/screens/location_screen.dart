@@ -1,6 +1,5 @@
 import 'package:clima/icons/meteocons_icons.dart';
 import 'package:clima/model/Weather.dart';
-import 'package:clima/services/®weather_client.dart';
 import 'package:clima/widgets/Background.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,21 +18,12 @@ final iconSize = 18.0;
 // farenheit = units=imperial
 // celcius = units=metric
 
-String _constructUrl({String lon, String lat}) {
-  return "https://api.openweathermap.org/data/2.5/weather?lat=" +
-      lat +
-      "&lon=" +
-      lon +
-      "&units=metric" +
-      "&appid=6edc6e89401d98df25b6ea5d5c81e85b";
-}
-
 class LocationScreen extends StatefulWidget {
   LocationScreen({
     this.weather,
   });
 
-  Weather weather;
+  final Weather weather;
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -44,30 +34,11 @@ class _LocationScreenState extends State<LocationScreen> {
   String temperature;
   String weatherDescription;
 
-  Future _fetchWeatherData() async {
-    WeatherApiClient weatherApi = WeatherApiClient(
-      url: _constructUrl(
-        lon: longitude.toString(),
-        lat: latitude.toString(),
-      ),
-    );
-
-    try {
-      Weather weather = await weatherApi.fetchWeatherUpdates();
-      setState(() {
-        weatherDescription = weather.description;
-        temperature = weather.temperature.toString();
-      });
-    } catch (e) {
-      print('something went wrong');
-    }
-  }
-
   @override
   void initState() {
     super.initState();
 
-    _fetchWeatherData();
+//    _fetchWeatherData();
   }
 
   @override
@@ -221,7 +192,9 @@ class _LocationScreenState extends State<LocationScreen> {
                                     Row(
                                       children: <Widget>[
                                         Text(
-                                          temperature ?? '--',
+                                          widget.weather.temperature
+                                                  .toString() ??
+                                              '--',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 90.0,
@@ -247,7 +220,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                         ),
                                         SizedBox(height: 10.0),
                                         Text(
-                                          weatherDescription ?? '--',
+                                          widget.weather.description ?? '--',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 18.0,
