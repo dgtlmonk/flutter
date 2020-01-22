@@ -142,7 +142,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                   width: 10.0,
                                 ),
                                 Text(
-                                  'Pasig, Shaw Blvd',
+                                  widget.weather.city ?? '--',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w800,
                                     color: kDarkGray,

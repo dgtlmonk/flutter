@@ -1,3 +1,4 @@
+import 'package:clima/icons/meteocons_icons.dart';
 import 'package:clima/model/Weather.dart';
 import 'package:http/http.dart';
 
@@ -18,7 +19,6 @@ class WeatherApiClient {
 
   // FIXME: lon, lat params instead
   Future<Weather> fetchWeatherUpdates() async {
-    print('fetching weather updates ...');
     Response response = await get(this.url);
 
     if (response.statusCode == 200) {
@@ -26,7 +26,12 @@ class WeatherApiClient {
     }
 
     return Weather.fromMap(
-      {'description': 'failed to connect.', 'temperature': '--'},
+      {
+        'description': 'failed to connect.',
+        'temperature': '--',
+        'icon': Meteocons.na,
+        'city': '--'
+      },
     );
   }
 }

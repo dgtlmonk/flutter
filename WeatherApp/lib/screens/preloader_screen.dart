@@ -1,6 +1,6 @@
 import 'package:clima/model/Weather.dart';
 import 'package:clima/screens/location_screen.dart';
-import 'package:clima/services/%C2%AEweather_client.dart';
+import 'package:clima/services/weather_client.dart';
 import 'package:clima/widgets/Background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -68,10 +68,7 @@ class _PreloaderScreenState extends State<PreloaderScreen> {
 
     try {
       Weather weather = await weatherApi.fetchWeatherUpdates();
-//      setState(() {
-//        weatherDescription = weather.description;
-//        temperature = weather.temperature.toString();
-//      });
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
@@ -81,7 +78,7 @@ class _PreloaderScreenState extends State<PreloaderScreen> {
         }),
       );
     } catch (e) {
-      print('something went wrong');
+      print('something went wrong ' + e.toString());
     }
   }
 

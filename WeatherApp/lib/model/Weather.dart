@@ -4,16 +4,17 @@ import 'package:clima/icons/meteocons_icons.dart';
 import 'package:flutter/cupertino.dart';
 
 class Weather {
-  Weather({
-    @required this.temperature,
-    this.description,
-    this.city,
-    this.icon,
-  });
+  Weather(
+      {@required this.temperature,
+      this.description,
+      this.city,
+      this.icon,
+      this.tip});
 
-  final double temperature;
-  final String description;
   final String city;
+  final String description;
+  final double temperature;
+  final String tip;
   final IconData icon;
 
   // Pattern based of FlutterMates Flutter showcase
@@ -26,16 +27,18 @@ class Weather {
       'description': _weather['description'],
       'temperature': _main['temp'],
       'city': _json['name'],
-      'id': _weather['id']
+      'id': _weather['id'],
     });
   }
 
   static Weather fromMap(Map map) {
     return new Weather(
-        city: map['city'],
-        temperature: map['temperature'],
-        description: map['description'],
-        icon: _getWeatherIcon(map['id']));
+      city: map['city'],
+      description: map['description'],
+      temperature: map['temperature'],
+      tip: _getTip(map['temperature'].toInt()),
+      icon: _getWeatherIcon(map['id']),
+    );
   }
 
   static IconData _getWeatherIcon(int condition) {
@@ -57,6 +60,18 @@ class Weather {
       return Meteocons.clouds;
     } else {
       return Meteocons.na;
+    }
+  }
+
+  static String _getTip(int temp) {
+    if (temp > 25) {
+      return 'It\'s 🍦 time';
+    } else if (temp > 20) {
+      return 'Time for shorts and 👕';
+    } else if (temp < 10) {
+      return 'You\'ll need 🧣 and 🧤';
+    } else {
+      return 'Bring a 🧥 just in case';
     }
   }
 }
