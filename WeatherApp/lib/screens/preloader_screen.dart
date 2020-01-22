@@ -49,6 +49,9 @@ class _PreloaderScreenState extends State<PreloaderScreen> {
   }
 
   // TODO: put in utils file
+  // farenheit = units=imperial
+  // celcius = units=metric
+
   String _constructUrl({String lon, String lat}) {
     return "https://api.openweathermap.org/data/2.5/weather?lat=" +
         lat +

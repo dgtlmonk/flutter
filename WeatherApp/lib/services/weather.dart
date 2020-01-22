@@ -1,5 +1,7 @@
+import 'package:clima/icons/meteocons_icons.dart';
+
 class WeatherModel {
-  String getWeatherIcon(int condition) {
+  getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
     } else if (condition < 400) {
@@ -11,7 +13,7 @@ class WeatherModel {
     } else if (condition < 800) {
       return '🌫';
     } else if (condition == 800) {
-      return '☀️';
+      return Meteocons.clouds_flash;
     } else if (condition <= 804) {
       return '☁️';
     } else {
