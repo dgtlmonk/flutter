@@ -84,17 +84,18 @@ class _PreloaderScreenState extends State<PreloaderScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _verifyLocationAccess().then((position) {
       latitude = position.latitude;
       longitude = position.longitude;
-      print("long " + longitude.toString() + " lat " + latitude.toString());
-      setState(() {
-        latitude = position.latitude;
-        longitude = position.longitude;
-      });
+
+      //FIXME: do we really need this ?
+//      setState(() {
+//        latitude = position.latitude;
+//        longitude = position.longitude;
+//      });
+//
       _fetchWeatherData(lat: latitude.toString(), lon: longitude.toString());
     }).whenComplete(() {
       // do something else .... tb
