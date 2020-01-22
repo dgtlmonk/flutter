@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFFDEE7EF), //Color(0xFFD9E7FE),
       ),
       home: SafeArea(
-//        child: LoadingScreen(),
         child: PreloaderScreen(),
       ),
     );

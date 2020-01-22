@@ -23,6 +23,8 @@ The objective of this tutorial is to learn about asynchronous programming in Dar
 - How to use the TextField Widget to take user input.
 
 
+The UI design implementation I made for this is based of [Weather UI](https://dribbble.com/shots/6211091-Weather-mobile-app/attachments) App design by [Daniel Nefedov](https://dribbble.com/sirenix_inc)
+
+
 >This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
 
-![End Banner](https://github.com/londonappbrewery/Images/blob/master/readme-end-banner.png)
