@@ -5,6 +5,7 @@ import 'package:clima/widgets/Background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PreloaderScreen extends StatefulWidget {
@@ -61,9 +62,9 @@ class _PreloaderScreenState extends State<PreloaderScreen> {
         "&appid=6edc6e89401d98df25b6ea5d5c81e85b";
   }
 
-  Future _fetchWeatherData({String lon, String lat}) async {
+  Future _fetchWeatherData({double lon, double lat}) async {
     WeatherApiClient weatherApi = WeatherApiClient(
-      url: _constructUrl(lon: lon, lat: lat),
+      url: _constructUrl(lon: lon.toString(), lat: lat.toString()),
     );
 
     try {
@@ -74,6 +75,7 @@ class _PreloaderScreenState extends State<PreloaderScreen> {
         MaterialPageRoute(builder: (context) {
           return LocationScreen(
             weather: weather,
+            latlng: new LatLng(lat, lon),
           );
         }),
       );
@@ -96,7 +98,7 @@ class _PreloaderScreenState extends State<PreloaderScreen> {
 //        longitude = position.longitude;
 //      });
 //
-      _fetchWeatherData(lat: latitude.toString(), lon: longitude.toString());
+      _fetchWeatherData(lat: latitude, lon: longitude);
     }).whenComplete(() {
       // do something else .... tb
     }).catchError((e) {

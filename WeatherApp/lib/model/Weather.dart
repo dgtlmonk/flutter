@@ -4,12 +4,13 @@ import 'package:clima/icons/meteocons_icons.dart';
 import 'package:flutter/cupertino.dart';
 
 class Weather {
-  Weather(
-      {@required this.temperature,
-      this.description,
-      this.city,
-      this.icon,
-      this.tip});
+  Weather({
+    @required this.temperature,
+    this.description,
+    this.city,
+    this.icon,
+    this.tip,
+  });
 
   final String city;
   final String description;
