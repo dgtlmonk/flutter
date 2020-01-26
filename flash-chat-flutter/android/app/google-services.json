@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "935702269647",
+    "firebase_url": "https://dgtlmonkstudio-e21e7.firebaseio.com",
+    "project_id": "dgtlmonkstudio-e21e7",
+    "storage_bucket": "dgtlmonkstudio-e21e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935702269647:android:ceca0c8b27fc2721a071ba",
+        "android_client_info": {
+          "package_name": "dev.dgtlmonk.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935702269647-dv6d93gja25bv3pj89smj8bfdbjvnggd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.dgtlmonk.auth",
+            "certificate_hash": "77b3143e66222770f3660aa53015922195c7e050"
+          }
+        },
+        {
+          "client_id": "935702269647-qlorkcphi10osj7v04f87uc1fjkmnimj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAptnjq_tfzucT1AJ4TTBAUbU9hgonlxaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935702269647-qlorkcphi10osj7v04f87uc1fjkmnimj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "935702269647-v0mhlr21bgjt0c2d20a2ofbv9sjmsfjb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.dgtlmonk.auth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935702269647:android:8cac8bd8682c5a48a071ba",
+        "android_client_info": {
+          "package_name": "dev.dgtlmonk.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935702269647-qlorkcphi10osj7v04f87uc1fjkmnimj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAptnjq_tfzucT1AJ4TTBAUbU9hgonlxaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935702269647-qlorkcphi10osj7v04f87uc1fjkmnimj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "935702269647-v0mhlr21bgjt0c2d20a2ofbv9sjmsfjb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.dgtlmonk.auth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
