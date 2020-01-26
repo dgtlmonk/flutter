@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  static const id = 'registration';
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
@@ -16,9 +18,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 200.0,
-              child: Image.asset('images/logo.png'),
+            Hero(
+              tag: 'logo',
+              child: Container(
+                height: 200.0,
+                child: Image.asset('images/logo.png'),
+              ),
             ),
             SizedBox(
               height: 48.0,
@@ -87,6 +92,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     'Register',
                     style: TextStyle(color: Colors.white),
                   ),
+                ),
+              ),
+            ),
+            Material(
+              color: Colors.blueAccent,
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              elevation: 5.0,
+              child: MaterialButton(
+                onPressed: () {
+                  //Implement registration functionality.
+                  Navigator.pop(context);
+                },
+                minWidth: 200.0,
+                height: 42.0,
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),

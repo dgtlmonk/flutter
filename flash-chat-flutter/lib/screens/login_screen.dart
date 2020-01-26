@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const id = 'login';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -16,9 +18,12 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 200.0,
-              child: Image.asset('images/logo.png'),
+            Hero(
+              tag: 'logo',
+              child: Container(
+                height: 200.0,
+                child: Image.asset('images/logo.png'),
+              ),
             ),
             SizedBox(
               height: 48.0,
@@ -90,6 +95,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'Log In',
                   ),
+                ),
+              ),
+            ),
+            Material(
+              color: Colors.lightBlueAccent,
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              elevation: 5.0,
+              child: MaterialButton(
+                onPressed: () {
+                  //Implement login functionality.
+                  Navigator.pop(context);
+                },
+                minWidth: 200.0,
+                height: 42.0,
+                child: Text(
+                  'Cancel',
                 ),
               ),
             ),
