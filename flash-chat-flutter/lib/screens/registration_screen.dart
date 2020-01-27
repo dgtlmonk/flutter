@@ -101,7 +101,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   decoration: kTextFieldDecoration.copyWith(
                       suffixIcon: IconButton(
                         icon: Icon(_showPassword
-                            ? Icons.visibility_of
+                            ? Icons.visibility_off
                             : Icons.visibility),
                         onPressed: () {
                           setState(() {
