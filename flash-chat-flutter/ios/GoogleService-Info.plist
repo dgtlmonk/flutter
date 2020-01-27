@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>935702269647-n4jd4ad60p2rs2hcva2hb887s1qulk05.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.935702269647-n4jd4ad60p2rs2hcva2hb887s1qulk05</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>935702269647-dv6d93gja25bv3pj89smj8bfdbjvnggd.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBNG7u38U4n1Rbja6MuFwsqdVUmd0xD0OY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>935702269647</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dev.dgtlmonk.flashchat</string>
+	<key>PROJECT_ID</key>
+	<string>dgtlmonkstudio-e21e7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dgtlmonkstudio-e21e7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:935702269647:ios:45486c4c3da3387aa071ba</string>
+	<key>DATABASE_URL</key>
+	<string>https://dgtlmonkstudio-e21e7.firebaseio.com</string>
+</dict>
+</plist>
