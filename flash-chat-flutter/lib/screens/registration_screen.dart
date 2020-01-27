@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const id = 'registration';
@@ -8,8 +11,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+
   String email;
   String password;
+  String firebaseError;
 
   InputDecoration kTextFieldDecoration = InputDecoration(
     hintStyle: TextStyle(color: Colors.black12),
@@ -26,6 +32,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       borderRadius: BorderRadius.all(Radius.circular(32.0)),
     ),
   );
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+//    _auth.signOut();
+    FirebaseAuth.instance.onAuthStateChanged.listen((firebaseUser) {
+      print('-- onAuthStateChanged ---');
+
+      if (firebaseUser.email != null) {
+        print(firebaseUser.email);
+        Navigator.pushNamed(context, ChatScreen.id);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +71,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   height: 48.0,
                 ),
                 TextField(
+                  keyboardType:
+                      TextInputType.emailAddress, // email type keyboard
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -63,7 +86,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 SizedBox(
                   height: 8.0,
                 ),
-                TextField(
+                TextFormField(
                   obscureText: true,
                   style: TextStyle(
                     color: Colors.black,
@@ -73,11 +96,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     password = value;
                   },
                   decoration: kTextFieldDecoration.copyWith(
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.forward),
+                        onPressed: () {
+                          print('show/hide password');
+                          setState(() {
+                            password = '';
+                          });
+                        },
+                        color: Colors.black,
+                      ),
                       hintText: 'Enter your password'),
                 ),
                 SizedBox(
                   height: 24.0,
                 ),
+                // error
+                if (firebaseError != null)
+                  Text(firebaseError),
+                // ---
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: Material(
@@ -85,10 +122,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () {
-                        //Implement registration functionality.
-                        print(email);
-                        print(password);
+                      onPressed: () async {
+                        await _auth
+                            .createUserWithEmailAndPassword(
+                          email: email.trim(),
+                          password: password.trim(),
+                        )
+                            .then((value) {
+                          setState(() {
+                            firebaseError = '';
+                          });
+                        }).catchError((e) {
+                          PlatformException _error = e as PlatformException;
+                          setState(() {
+                            firebaseError = _error.message;
+                          });
+
+                          print(_error.message);
+                        });
                       },
                       minWidth: 200.0,
                       height: 42.0,
