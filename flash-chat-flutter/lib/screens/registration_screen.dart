@@ -13,9 +13,11 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
 
+  TextEditingController tfPasswordController;
   String email;
   String password;
   String firebaseError;
+  bool _showPassword = false;
 
   InputDecoration kTextFieldDecoration = InputDecoration(
     hintStyle: TextStyle(color: Colors.black12),
@@ -87,7 +89,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   height: 8.0,
                 ),
                 TextFormField(
-                  obscureText: true,
+                  controller: tfPasswordController,
+                  obscureText: _showPassword,
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -97,14 +100,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                   decoration: kTextFieldDecoration.copyWith(
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.forward),
+                        icon: Icon(_showPassword
+                            ? Icons.visibility_of
+                            : Icons.visibility),
                         onPressed: () {
-                          print('show/hide password');
                           setState(() {
-                            password = '';
+                            _showPassword = !_showPassword;
                           });
                         },
-                        color: Colors.black,
+                        color: Colors.black38,
                       ),
                       hintText: 'Enter your password'),
                 ),
@@ -130,7 +134,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         )
                             .then((value) {
                           setState(() {
-                            firebaseError = '';
+                            firebaseError = null;
                           });
                         }).catchError((e) {
                           PlatformException _error = e as PlatformException;
