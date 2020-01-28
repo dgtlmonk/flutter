@@ -122,11 +122,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       elevation: 5.0,
                       child: MaterialButton(
                         onPressed: () async {
+                          if (email == null || password == null) return;
+
                           setState(() {
                             _isBusy = true;
                           });
-
-                          if (email == null || password == null) return;
 
                           await _auth
                               .createUserWithEmailAndPassword(

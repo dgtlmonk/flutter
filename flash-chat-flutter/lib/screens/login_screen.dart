@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LoginScreen extends StatefulWidget {
   static const id = 'login';
@@ -9,12 +10,11 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  final _auth = FirebaseAuth.instance;
+class _LoginScreenState extends State<LoginScreen> with Auth {
   bool _showPassword = false;
+  bool _isBusy = false;
   String username;
   String password;
-  String authError;
 
   InputDecoration kTextFieldDecoration = InputDecoration(
     hintStyle: TextStyle(color: Colors.black12),
@@ -33,127 +33,170 @@ class _LoginScreenState extends State<LoginScreen> {
   );
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    super.init();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    height: 200.0,
-                    child: Image.asset('images/logo.png'),
+      body: ModalProgressHUD(
+        inAsyncCall: _isBusy,
+        color: Colors.blueAccent,
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Hero(
+                    tag: 'logo',
+                    child: Container(
+                      height: 200.0,
+                      child: Image.asset('images/logo.png'),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 48.0,
-                ),
-                TextField(
+                  SizedBox(
+                    height: 48.0,
+                  ),
+                  TextField(
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      onChanged: (value) {
+                        //Do something with the user input.
+                        username = value;
+                      },
+                      decoration: kTextFieldDecoration.copyWith(
+                          hintText: 'Enter username/email')),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  TextField(
+                    obscureText: !_showPassword,
                     style: TextStyle(
                       color: Colors.black,
                     ),
                     onChanged: (value) {
                       //Do something with the user input.
-                      username = value;
+                      password = value;
                     },
                     decoration: kTextFieldDecoration.copyWith(
-                        hintText: 'Enter username/email')),
-                SizedBox(
-                  height: 8.0,
-                ),
-                TextField(
-                  obscureText: !_showPassword,
-                  style: TextStyle(
-                    color: Colors.black,
+                        suffixIcon: IconButton(
+                          icon: Icon(_showPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _showPassword = !_showPassword;
+                            });
+                          },
+                          color: Colors.black38,
+                        ),
+                        hintText: 'Enter your password'),
                   ),
-                  onChanged: (value) {
-                    //Do something with the user input.
-                    password = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      suffixIcon: IconButton(
-                        icon: Icon(_showPassword
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                        onPressed: () {
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  if (authError != null) Text(authError),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Material(
+                      color: Colors.lightBlueAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      elevation: 5.0,
+                      child: MaterialButton(
+                        onPressed: () async {
+                          if (username == null || password == null) return;
+
+                          String _errMsg = 'Invalid login';
                           setState(() {
-                            _showPassword = !_showPassword;
+                            _isBusy = true;
+                          });
+
+                          //Implement login functionality.
+                          await _auth
+                              .signInWithEmailAndPassword(
+                                  email: username.trim(),
+                                  password: password.trim())
+                              .catchError((e) {
+                            PlatformException _error = e as PlatformException;
+
+//                            if (_error.code == 'ERROR_INVALID_EMAIL') {
+                            _errMsg = _authErrors[_error.code] ??
+                                _authErrors['DEFAULT'];
+//                            }
+
+//                            if (_error.code == 'ERROR_WRONG_PASSWORD') {
+//                              _errMsg = 'Wrong password';
+//                            }
+
+                            setState(() {
+                              authError = _errMsg;
+                            });
+                          });
+
+                          setState(() {
+                            _isBusy = false;
                           });
                         },
-                        color: Colors.black38,
+                        minWidth: 200.0,
+                        height: 42.0,
+                        child: Text(
+                          'Log In',
+                        ),
                       ),
-                      hintText: 'Enter your password'),
-                ),
-                SizedBox(
-                  height: 24.0,
-                ),
-                if (authError != null) Text(authError),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Material(
+                    ),
+                  ),
+                  Material(
                     color: Colors.lightBlueAccent,
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () async {
-                        String _errMsg = 'Invalid login';
-
+                      onPressed: () {
                         //Implement login functionality.
-                        print(username + password);
-                        await _auth
-                            .signInWithEmailAndPassword(
-                                email: username, password: password)
-                            .catchError((e) {
-                          PlatformException _error = e as PlatformException;
-
-                          if (_error.code == 'ERROR_INVALID_EMAIL') {
-                            _errMsg = 'Invalid email';
-                          }
-
-                          if (_error.code == 'ERROR_WRONG_PASSWORD') {
-                            _errMsg = 'Wrong password';
-                          }
-
-                          setState(() {
-                            authError = _errMsg;
-                          });
-                        });
+                        Navigator.pop(context);
                       },
                       minWidth: 200.0,
                       height: 42.0,
                       child: Text(
-                        'Log In',
+                        'Cancel',
                       ),
                     ),
                   ),
-                ),
-                Material(
-                  color: Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  elevation: 5.0,
-                  child: MaterialButton(
-                    onPressed: () {
-                      //Implement login functionality.
-                      Navigator.pop(context);
-                    },
-                    minWidth: 200.0,
-                    height: 42.0,
-                    child: Text(
-                      'Cancel',
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+mixin Auth {
+  String authError;
+  final _auth = FirebaseAuth.instance;
+  Map<String, dynamic> _authErrors = {
+    'DEFAULT': 'User not found',
+    'ERROR_INVALID_EMAIL': 'Invalid email',
+    'ERROR_WRONG_PASSWORD': 'Wrong password',
+  };
+
+//  if (_error.code == 'ERROR_WRONG_PASSWORD') {
+//  _errMsg = 'Wrong password';
+//  }
+
+  init() {
+    print('init called');
+  }
+
+  onError() {
+    print('onError');
   }
 }
