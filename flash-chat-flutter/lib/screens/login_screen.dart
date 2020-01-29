@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/constants/auth_errors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -10,7 +11,9 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> with Auth {
+class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  String _authError = null;
   bool _showPassword = false;
   bool _isBusy = false;
   String username;
@@ -34,9 +37,7 @@ class _LoginScreenState extends State<LoginScreen> with Auth {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    super.init();
   }
 
   @override
@@ -69,7 +70,6 @@ class _LoginScreenState extends State<LoginScreen> with Auth {
                         color: Colors.black,
                       ),
                       onChanged: (value) {
-                        //Do something with the user input.
                         username = value;
                       },
                       decoration: kTextFieldDecoration.copyWith(
@@ -83,7 +83,6 @@ class _LoginScreenState extends State<LoginScreen> with Auth {
                       color: Colors.black,
                     ),
                     onChanged: (value) {
-                      //Do something with the user input.
                       password = value;
                     },
                     decoration: kTextFieldDecoration.copyWith(
@@ -103,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> with Auth {
                   SizedBox(
                     height: 24.0,
                   ),
-                  if (authError != null) Text(authError),
+                  if (_authError != null) Text(_authError),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                     child: Material(
@@ -119,7 +118,6 @@ class _LoginScreenState extends State<LoginScreen> with Auth {
                             _isBusy = true;
                           });
 
-                          //Implement login functionality.
                           await _auth
                               .signInWithEmailAndPassword(
                                   email: username.trim(),
@@ -127,17 +125,12 @@ class _LoginScreenState extends State<LoginScreen> with Auth {
                               .catchError((e) {
                             PlatformException _error = e as PlatformException;
 
-//                            if (_error.code == 'ERROR_INVALID_EMAIL') {
-                            _errMsg = _authErrors[_error.code] ??
-                                _authErrors['DEFAULT'];
-//                            }
-
-//                            if (_error.code == 'ERROR_WRONG_PASSWORD') {
-//                              _errMsg = 'Wrong password';
-//                            }
+                            _errMsg = kAuthErrors[_error.code] ??
+                                kAuthErrors['DEFAULT'];
 
                             setState(() {
-                              authError = _errMsg;
+                              print('setting const error');
+                              _authError = _errMsg;
                             });
                           });
 
@@ -176,27 +169,5 @@ class _LoginScreenState extends State<LoginScreen> with Auth {
         ),
       ),
     );
-  }
-}
-
-mixin Auth {
-  String authError;
-  final _auth = FirebaseAuth.instance;
-  Map<String, dynamic> _authErrors = {
-    'DEFAULT': 'User not found',
-    'ERROR_INVALID_EMAIL': 'Invalid email',
-    'ERROR_WRONG_PASSWORD': 'Wrong password',
-  };
-
-//  if (_error.code == 'ERROR_WRONG_PASSWORD') {
-//  _errMsg = 'Wrong password';
-//  }
-
-  init() {
-    print('init called');
-  }
-
-  onError() {
-    print('onError');
   }
 }

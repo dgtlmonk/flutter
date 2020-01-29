@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -133,7 +134,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             email: email.trim(),
                             password: password.trim(),
                           )
-                              .then((value) {
+                              .then((AuthResult authResult) {
+//                            print(
+//                                'create user success ' + authResult.user.email);
+
+                            Navigator.pushNamed(context, ChatScreen.id);
                             setState(() {
                               authError = null;
                             });

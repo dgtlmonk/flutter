@@ -29,14 +29,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 //      upperBound: 100.0,
     );
 
-//    animation = CurvedAnimation(parent: controller, curve: Curves.bounceOut);
     animation =
         ColorTween(begin: Colors.blue, end: Colors.white).animate(controller);
 
     controller.forward();
     controller.addListener(() {
+      // kind of odd way to repaint
       setState(() {});
-//      print(animation.value);
     });
   }
 
