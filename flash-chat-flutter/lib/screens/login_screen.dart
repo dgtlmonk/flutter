@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/constants/auth_errors.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -114,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (username == null || password == null) return;
 
                           String _errMsg = 'Invalid login';
+
                           setState(() {
                             _isBusy = true;
                           });
@@ -122,14 +124,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               .signInWithEmailAndPassword(
                                   email: username.trim(),
                                   password: password.trim())
-                              .catchError((e) {
+                              .then((AuthResult authResult) {
+                            print(authResult.user.email);
+
+                            Navigator.pushNamed(context, ChatScreen.id);
+                            setState(() {
+                              _authError = null;
+                            });
+                          }).catchError((e) {
                             PlatformException _error = e as PlatformException;
 
                             _errMsg = kAuthErrors[_error.code] ??
                                 kAuthErrors['DEFAULT'];
 
                             setState(() {
-                              print('setting const error');
                               _authError = _errMsg;
                             });
                           });
@@ -152,7 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     elevation: 5.0,
                     child: MaterialButton(
                       onPressed: () {
-                        //Implement login functionality.
                         Navigator.pop(context);
                       },
                       minWidth: 200.0,

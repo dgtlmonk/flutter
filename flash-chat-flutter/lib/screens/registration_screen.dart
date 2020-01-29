@@ -135,9 +135,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             password: password.trim(),
                           )
                               .then((AuthResult authResult) {
-//                            print(
-//                                'create user success ' + authResult.user.email);
-
                             Navigator.pushNamed(context, ChatScreen.id);
                             setState(() {
                               authError = null;
