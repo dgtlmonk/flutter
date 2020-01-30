@@ -1,4 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flash_chat/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   // animation curve
   Animation animation;
 
+  void getCurrentUser() async {
+    try {
+      FirebaseUser loggedInUser = await FirebaseAuth.instance.currentUser();
+      if (loggedInUser != null) {
+        Navigator.pushNamed(context, ChatScreen.id);
+      }
+    } catch (e) {
+      print('no logged in user');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       // kind of odd way to repaint
       setState(() {});
     });
+    getCurrentUser();
   }
 
   @override
