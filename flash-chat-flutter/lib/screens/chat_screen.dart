@@ -3,7 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
 
-final Firestore firestore = Firestore.instance;
+Firestore firestore = Firestore.instance;
+FirebaseUser loggedInUser;
+
+BorderRadius kBorderRadiusLoggedInUser = BorderRadius.only(
+  topLeft: Radius.circular(30),
+  bottomLeft: Radius.circular(30),
+  bottomRight: Radius.circular(30),
+);
+
+BorderRadius kBorderRadiusOtherUsers = BorderRadius.only(
+  topRight: Radius.circular(30),
+  bottomLeft: Radius.circular(30),
+  bottomRight: Radius.circular(30),
+);
 
 class ChatScreen extends StatefulWidget {
   static const id = 'chat';
@@ -15,7 +28,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextCtrl = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
 
   String messageText;
 
@@ -57,10 +69,8 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
-//                _auth.signOut();
-//                Navigator.pop(context);
-//                getMessages();
-                //Implement logout functionality
+                _auth.signOut();
+                Navigator.pop(context);
               }),
         ],
         title: Text('⚡️Chat'),
@@ -79,6 +89,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
                       controller: messageTextCtrl,
                       onChanged: (value) {
                         //Do something with the user input.
@@ -132,21 +145,29 @@ class MessageStream extends StatelessWidget {
             );
           }
 
-          final messages = snapshot.data.documents;
+          final messages = snapshot.data.documents.reversed;
           List<Widget> messageWidgets = [];
 
           for (var message in messages) {
             final messageText = message.data['text'];
             final messageSender = message.data['sender'];
+            final isCurrentUser = loggedInUser.email != null &&
+                loggedInUser.email == messageSender;
 
             final messageWidget = Container(
               padding: EdgeInsets.all(10.0),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: isCurrentUser
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
                 children: <Widget>[
                   CircleAvatar(
                     radius: 20.0,
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage('https://i.pravatar.cc/309'),
+                    backgroundImage: NetworkImage(isCurrentUser
+                        ? 'https://i.pravatar.cc/309'
+                        : 'https://i.pravatar.cc/307'),
                   ),
                   SizedBox(
                     width: 10.0,
@@ -162,8 +183,13 @@ class MessageStream extends StatelessWidget {
                         ),
                         textAlign: TextAlign.left,
                       ),
+                      SizedBox(
+                        height: 4.00,
+                      ),
                       Material(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: isCurrentUser
+                            ? kBorderRadiusLoggedInUser
+                            : kBorderRadiusOtherUsers,
                         color: Colors.blueGrey,
                         elevation: 2.0,
                         child: Padding(
@@ -193,6 +219,8 @@ class MessageStream extends StatelessWidget {
           // but only the available space
           return Expanded(
             child: ListView(
+              reverse: true,
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
               children: messageWidgets,
             ),
           );
