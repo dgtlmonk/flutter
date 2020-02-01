@@ -53,132 +53,132 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Hero(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Flexible(
+                  child: Hero(
                     tag: 'logo',
                     child: Container(
                       height: 200.0,
                       child: Image.asset('images/logo.png'),
                     ),
                   ),
-                  SizedBox(
-                    height: 48.0,
+                ),
+                SizedBox(
+                  height: 48.0,
+                ),
+                TextField(
+                  keyboardType:
+                      TextInputType.emailAddress, // email type keyboard
+                  style: TextStyle(
+                    color: Colors.black,
                   ),
-                  TextField(
-                    keyboardType:
-                        TextInputType.emailAddress, // email type keyboard
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                    onChanged: (value) {
-                      //Do something with the user input.
-                      email = value;
-                    },
-                    decoration: kTextFieldDecoration.copyWith(
-                        hintText: 'Enter your email'),
+                  onChanged: (value) {
+                    //Do something with the user input.
+                    email = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter your email'),
+                ),
+                SizedBox(
+                  height: 8.0,
+                ),
+                TextFormField(
+                  controller: tfPasswordController,
+                  obscureText: !_showPassword,
+                  style: TextStyle(
+                    color: Colors.black,
                   ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  TextFormField(
-                    controller: tfPasswordController,
-                    obscureText: !_showPassword,
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                    onChanged: (value) {
-                      //Do something with the user input.
-                      password = value;
-                    },
-                    decoration: kTextFieldDecoration.copyWith(
-                        suffixIcon: IconButton(
-                          icon: Icon(_showPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _showPassword = !_showPassword;
-                            });
-                          },
-                          color: Colors.black38,
-                        ),
-                        hintText: 'Enter your password'),
-                  ),
-                  SizedBox(
-                    height: 24.0,
-                  ),
-                  // error
-                  if (authError != null)
-                    Text(authError),
-                  // ---
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: Material(
-                      color: Colors.blueAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                      elevation: 5.0,
-                      child: MaterialButton(
-                        onPressed: () async {
-                          if (email == null || password == null) return;
-
+                  onChanged: (value) {
+                    //Do something with the user input.
+                    password = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      suffixIcon: IconButton(
+                        icon: Icon(_showPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
                           setState(() {
-                            _isBusy = true;
-                          });
-
-                          await _auth
-                              .createUserWithEmailAndPassword(
-                            email: email.trim(),
-                            password: password.trim(),
-                          )
-                              .then((AuthResult authResult) {
-                            Navigator.pushNamed(context, ChatScreen.id);
-                            setState(() {
-                              authError = null;
-                            });
-                          }).catchError((e) {
-                            PlatformException _error = e as PlatformException;
-                            setState(() {
-                              authError = _error.message;
-                            });
-
-                            print(_error.message);
-                          });
-
-                          setState(() {
-                            _isBusy = false;
+                            _showPassword = !_showPassword;
                           });
                         },
-                        minWidth: 200.0,
-                        height: 42.0,
-                        child: Text(
-                          'Register',
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        color: Colors.black38,
                       ),
-                    ),
-                  ),
-                  Material(
+                      hintText: 'Enter your password'),
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                // error
+                if (authError != null)
+                  Text(authError),
+                // ---
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: Material(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () {
-                        //Implement registration functionality.
-                        Navigator.pop(context);
+                      onPressed: () async {
+                        if (email == null || password == null) return;
+
+                        setState(() {
+                          _isBusy = true;
+                        });
+
+                        await _auth
+                            .createUserWithEmailAndPassword(
+                          email: email.trim(),
+                          password: password.trim(),
+                        )
+                            .then((AuthResult authResult) {
+                          Navigator.pushNamed(context, ChatScreen.id);
+                          setState(() {
+                            authError = null;
+                          });
+                        }).catchError((e) {
+                          PlatformException _error = e as PlatformException;
+                          setState(() {
+                            authError = _error.message;
+                          });
+
+                          print(_error.message);
+                        });
+
+                        setState(() {
+                          _isBusy = false;
+                        });
                       },
                       minWidth: 200.0,
+                      height: 42.0,
                       child: Text(
-                        'Cancel',
+                        'Register',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                Material(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  elevation: 5.0,
+                  child: MaterialButton(
+                    onPressed: () {
+                      //Implement registration functionality.
+                      Navigator.pop(context);
+                    },
+                    minWidth: 200.0,
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
