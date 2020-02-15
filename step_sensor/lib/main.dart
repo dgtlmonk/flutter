@@ -50,7 +50,6 @@ class _StepsDisplayState extends State<StepsDisplay> {
   }
 
   void _onData(int stepCountValue) async {
-    print('on data ... $stepCountValue');
 //    _pedometer = new Pedometer();
     setState(() {
       _stepCountValue = "$stepCountValue";
@@ -70,10 +69,17 @@ class _StepsDisplayState extends State<StepsDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF212429), Color(0xFF2A2D32)],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch
+
         children: <Widget>[
           Expanded(
             child: Column(
@@ -83,7 +89,7 @@ class _StepsDisplayState extends State<StepsDisplay> {
                   width: kCircleBG_width,
                   height: kCircleBG_width,
                   decoration: new BoxDecoration(
-                    color: Colors.blueGrey,
+                    color: Color(0xFF44474D),
                     shape: BoxShape.circle,
                   ),
                   child: Column(
@@ -112,7 +118,7 @@ class _StepsDisplayState extends State<StepsDisplay> {
             ),
           ),
         ],
-      )),
+      ),
     );
   }
 }

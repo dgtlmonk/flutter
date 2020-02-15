@@ -1,0 +1,116 @@
+{
+  "body_part": [
+    {
+      "id": 1,
+      "name": "neck"
+    },
+    {
+      "id": 2,
+      "name": "chest"
+    },
+    {
+      "id": 3,
+      "name": "upper arms"
+    },
+    {
+      "id": 4,
+      "name": "forearms"
+    },
+    {
+      "id": 5,
+      "name": "back"
+    },
+    {
+      "id": 6,
+      "name": "hips"
+    },
+    {
+      "id": 7,
+      "name": "waist"
+    },
+    {
+      "id": 8,
+      "name": "shoulders"
+    },
+    {
+      "id": 9,
+      "name": "calves"
+    },
+    {
+      "id": 10,
+      "name": "thighs"
+    }
+  ],
+  "machine": [
+    {
+      "id": 1,
+      "name": "barbell"
+
+    },
+    {
+      "id": 2,
+      "name": "cable"
+    },
+    {
+      "id": 3,
+      "name": "dumbbell"
+    },
+    {
+      "id": 4,
+      "name": "weighted"
+    },
+    {
+      "id": 5,
+      "name": "lever (plate loaded)"
+    },
+    {
+      "id": 6,
+      "name": "level (selectorized)"
+    },
+    {
+      "id": 7,
+      "name": "suspended"
+    },
+    {
+      "id": 8,
+      "name": "plyometric"
+    },
+    {
+      "id": 9,
+      "name": "stretch"
+    },
+    {
+      "id": 10,
+      "name": "sled"
+    },
+    {
+      "id": 11,
+      "name": "isometric"
+    },
+    {
+      "id": 12,
+      "name": "body weight"
+    }
+  ],
+  "muscle": [
+    {
+      "id": 1,
+      "body_part": 1,
+      "name": "Sternocleidomastoid"
+    }
+  ],
+  "exercise": [
+    {
+      "id": 1,
+      "name": "Neck Flexion",
+      "muscle": 1,
+      "machine": 2
+    },
+    {
+      "id": 1,
+      "name": "Neck Flexion (with belt)",
+      "muscle": 1,
+      "machine": 2
+    }
+  ]
+}
