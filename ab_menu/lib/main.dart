@@ -1,4 +1,4 @@
-import 'package:ab_menu/screens/menu.dart';
+import 'package:ab_menu/screens/main_menu.dart';
 import 'package:ab_menu/screens/splash-menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

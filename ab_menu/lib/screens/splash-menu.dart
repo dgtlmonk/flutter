@@ -1,5 +1,5 @@
 import 'package:ab_menu/config/config.dart';
-import 'package:ab_menu/screens/menu.dart';
+import 'package:ab_menu/screens/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
