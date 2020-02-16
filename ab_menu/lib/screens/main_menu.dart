@@ -2,6 +2,7 @@ import 'dart:async' show Future;
 import 'dart:convert';
 
 import 'package:ab_menu/components/item_detail.dart';
+import 'package:ab_menu/data/products.dart';
 import 'package:ab_menu/icons/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -17,29 +18,6 @@ const signatureMenu = {
   'pescatarian': 'pescatarian',
 };
 
-class Product {
-//  String productId;
-  String name;
-  String price;
-  String macro;
-//  String src;
-  Product({
-//    this.productId,
-    this.name,
-    this.macro,
-    this.price,
-//    this.src,
-  });
-  factory Product.fromJson(Map<String, dynamic> parsedJson) {
-    return Product(
-//      productId: parsedJson['id'],
-      name: parsedJson['name'],
-      price: parsedJson['price'],
-      macro: parsedJson['macro'],
-    );
-  }
-}
-
 Future<String> _loadProductsAsset() async {
   return await rootBundle.loadString('data/products.json');
 }
@@ -49,7 +27,6 @@ Future<List<dynamic>> loadProducts() async {
   final jsonResponse = json.decode(jsonString);
 
   return jsonResponse['products'];
-//  return new Product.fromJson(jsonResponse);
 }
 
 class MenuScreen extends StatefulWidget {
@@ -57,6 +34,10 @@ class MenuScreen extends StatefulWidget {
   MenuScreen({this.selectedMenu = 'keto'});
 
   String selectedMenu;
+  List signatureMeals;
+  List ketoMeals;
+
+  var SelectedProduct = "signature";
 
   @override
   _MenuScreenState createState() => _MenuScreenState();
@@ -68,13 +49,23 @@ class _MenuScreenState extends State<MenuScreen> {
     // TODO: implement initState
     super.initState();
     loadProducts().then((List<dynamic> products) {
-      print(products
-          .where((product) => product["name"] == "Signature Meals")
-          .toString());
+      var _signatureMeals =
+          products.where((product) => product["name"] == "Signature Meals");
+//      var keto = _signatureMeals.
+//          .where((category) => category["categories"] == "Healthy keto");
+//      print(_signatureMeals
+//          .where((categories) =>
+//              categories["categories"]["name"] == "Healthy Keto")
+//          .toString());
+
+//      setState(() {
+//        widget.ketoMeals = healthyKeto;
+//      });
     });
   }
 
   _handleMenuSelect(String menu) {
+    print('menu select ' + menu);
     setState(() {
       widget.selectedMenu = menu;
     });
@@ -100,28 +91,39 @@ class _MenuScreenState extends State<MenuScreen> {
                   // bottom view
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+//                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Flexible(
-                          child: CustomScrollView(
-                            slivers: <Widget>[
-                              SliverGrid(
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
+                        Container(
+                          child: Flexible(
+                            child: CustomScrollView(
+                              slivers: <Widget>[
+                                SliverPadding(
+                                  padding: EdgeInsets.all(20.0),
+                                  sliver: SliverGrid(
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      mainAxisSpacing: 30.0,
+                                      crossAxisSpacing: 20.0,
+                                      childAspectRatio: 1.1,
+                                    ),
+                                    delegate: SliverChildBuilderDelegate(
+                                        (BuildContext context, int index) {
+                                      return new ItemDetailCard(
+                                        item: signatureKeto[index],
+                                      );
+                                    }, childCount: signatureKeto.length),
+
+//                                delegate: SliverChildListDelegate([
+//                                  ItemDetailCard(),
+//                                  ItemDetailCard(),
+//                                  ItemDetailCard(),
+//                                  ItemDetailCard(),
+//                                ]),
+                                  ),
                                 ),
-//                                delegate: SliverChildBuilderDelegate(
-//                                    (BuildContext context, int index) {
-//                                  return new ItemDetailCard();
-//                                }),
-                                delegate: SliverChildListDelegate([
-                                  ItemDetailCard(),
-                                  ItemDetailCard(),
-                                  ItemDetailCard(),
-                                  Text(widget.selectedMenu.toString())
-                                ]),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         )
                       ],
@@ -209,7 +211,7 @@ class _SignatureMenuState extends State<SignatureMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30.0),
+      margin: EdgeInsets.only(top: 30.0, bottom: 30.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         // TODO: for ListView params
@@ -306,9 +308,22 @@ class ProductsMenu extends StatelessWidget {
             label: 'HEALTHY TREATS',
             imgSrc: AssetImage('images/menu/treats.jpg'),
           ),
-          SizedBox(
-            height: 40.0,
-          )
+          ProductMenuButton(
+            label: 'FROZEN PRODUCTS',
+            imgSrc: AssetImage('images/menu/frozen.jpg'),
+          ),
+          ProductMenuButton(
+            label: 'SPREAD & SAUCES',
+            imgSrc: AssetImage('images/menu/spread.jpg'),
+          ),
+          ProductMenuButton(
+            label: 'PROTEIN ADD-ON',
+            imgSrc: AssetImage('images/menu/add-on.jpg'),
+          ),
+          ProductMenuButton(
+            label: 'DETOX SOUP',
+            imgSrc: AssetImage('images/menu/detox.jpg'),
+          ),
         ],
       ),
     );
@@ -323,37 +338,43 @@ class ProductMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          width: 100.0,
-          height: 100.0,
-          margin: EdgeInsets.only(left: 40.0, right: 40.0, bottom: 10.0),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 4.0),
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(kBordeRadius),
-            ),
-            image: DecorationImage(
-              image: this.imgSrc,
-              fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {
+        print('ok');
+        Navigator.pop(context);
+      },
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: 100.0,
+            height: 100.0,
+            margin: EdgeInsets.only(left: 40.0, right: 40.0, bottom: 10.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white, width: 4.0),
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(kBordeRadius),
+              ),
+              image: DecorationImage(
+                image: this.imgSrc,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
-        ),
-        Text(
-          this.label,
-          style: GoogleFonts.voltaire(
-            textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
+          Text(
+            this.label,
+            style: GoogleFonts.voltaire(
+              textStyle: Theme.of(context).textTheme.display1,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 40.0,
-        )
-      ],
+          SizedBox(
+            height: 40.0,
+          )
+        ],
+      ),
     );
   }
 }

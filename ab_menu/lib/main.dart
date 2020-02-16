@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MenuScreen(),
+      home: SplashMenu(),
       routes: {
         MenuScreen.id: (context) => MenuScreen(),
         SplashMenu.id: (context) => SplashMenu()

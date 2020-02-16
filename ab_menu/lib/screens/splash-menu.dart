@@ -35,25 +35,21 @@ class SplashMenu extends StatelessWidget {
                         borderRadius: BorderRadius.all(
                           Radius.circular(kBordeRadius),
                         ),
-                        child: Hero(
-                          // TODO: implement hero
-//                          tag: 'cover-$index',
-                          child: Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    'images/carousel/cover-$index.jpg'),
-                                fit: BoxFit.fill,
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(kBordeRadius),
-                              ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  'images/carousel/cover-$index.jpg'),
+                              fit: BoxFit.fill,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(kBordeRadius),
                             ),
                           ),
                         ),
                       );
                     },
-                    itemCount: 2,
+                    itemCount: 4,
                     itemHeight: 550.0,
                     itemWidth: 550.0,
                     scale: .2,
