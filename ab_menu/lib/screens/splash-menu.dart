@@ -40,7 +40,7 @@ class SplashMenu extends StatelessWidget {
                             image: DecorationImage(
                               image: AssetImage(
                                   'images/carousel/cover-$index.jpg'),
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(kBordeRadius),
@@ -50,8 +50,8 @@ class SplashMenu extends StatelessWidget {
                       );
                     },
                     itemCount: 4,
-                    itemHeight: 550.0,
-                    itemWidth: 550.0,
+                    itemHeight: 450.0,
+                    itemWidth: 450.0,
                     scale: .2,
                     layout: SwiperLayout.STACK,
                     pagination: new SwiperPagination(),
