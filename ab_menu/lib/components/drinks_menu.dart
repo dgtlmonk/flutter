@@ -3,16 +3,16 @@ import 'package:ab_menu/icons/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignatureMenu extends StatefulWidget {
-  SignatureMenu({this.activeMenu = signatureMeals.keto, this.onMenuSelect});
+class DrinksMenu extends StatefulWidget {
+  DrinksMenu({this.activeMenu = SignatureMeals.keto, this.onMenuSelect});
   dynamic activeMenu;
   final Function onMenuSelect;
 
   @override
-  _SignatureMenuState createState() => _SignatureMenuState();
+  _DrinksMenuState createState() => _DrinksMenuState();
 }
 
-class _SignatureMenuState extends State<SignatureMenu> {
+class _DrinksMenuState extends State<DrinksMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,64 +24,63 @@ class _SignatureMenuState extends State<SignatureMenu> {
         // scrollDirection: Axis.horizontal,
         children: <Widget>[
           CategoryMenuButton(
-            onMenuTap: () {
-              widget.onMenuSelect(signatureMeals.keto);
-              setState(() {
-                widget.activeMenu = signatureMeals.keto;
-              });
-            },
-            svgIcon:
-                SvgKeto(isActive: widget.activeMenu == signatureMeals.keto),
-            label: 'Healthy Keto',
-            isActive: widget.activeMenu == signatureMeals.keto,
-          ),
-          CategoryMenuButton(
               onMenuTap: () {
-                widget.onMenuSelect(signatureMeals.vegan);
+                widget.onMenuSelect(Drinks.cold_brew);
                 setState(() {
-                  widget.activeMenu = signatureMeals.vegan;
+                  widget.activeMenu = Drinks.cold_brew;
                 });
               },
               svgIcon:
-                  SvgVegan(isActive: widget.activeMenu == signatureMeals.vegan),
+                  SvgColdBew(isActive: widget.activeMenu == Drinks.cold_brew),
+              label: 'Cold Brew',
+              isActive: widget.activeMenu == Drinks.cold_brew),
+          CategoryMenuButton(
+              onMenuTap: () {
+                widget.onMenuSelect(SignatureMeals.vegan);
+                setState(() {
+                  widget.activeMenu = SignatureMeals.vegan;
+                });
+              },
+              svgIcon:
+                  SvgVegan(isActive: widget.activeMenu == SignatureMeals.vegan),
               label: 'Healthy Vegan',
-              isActive: widget.activeMenu == signatureMeals.vegan),
+              isActive: widget.activeMenu == SignatureMeals.vegan),
           CategoryMenuButton(
             onMenuTap: () {
-              widget.onMenuSelect(signatureMeals.balanced);
+              widget.onMenuSelect(SignatureMeals.balanced);
               setState(() {
-                widget.activeMenu = signatureMeals.balanced;
+                widget.activeMenu = SignatureMeals.balanced;
               });
             },
             svgIcon: SvgBalanced(
-              isActive: widget.activeMenu == signatureMeals.balanced,
+              isActive: widget.activeMenu == SignatureMeals.balanced,
             ),
             label: 'Balanced',
-            isActive: widget.activeMenu == signatureMeals.balanced,
+            isActive: widget.activeMenu == SignatureMeals.balanced,
           ),
           CategoryMenuButton(
             onMenuTap: () {
-              widget.onMenuSelect(signatureMeals.detox);
+              widget.onMenuSelect(SignatureMeals.detox);
               setState(() {
-                widget.activeMenu = signatureMeals.detox;
+                widget.activeMenu = SignatureMeals.detox;
               });
             },
             svgIcon:
-                SvgDetox(isActive: widget.activeMenu == signatureMeals.detox),
+                SvgDetox(isActive: widget.activeMenu == SignatureMeals.detox),
             label: 'Detox Salads',
-            isActive: widget.activeMenu == signatureMeals.detox,
+            isActive: widget.activeMenu == SignatureMeals.detox,
           ),
           CategoryMenuButton(
             onMenuTap: () {
-              widget.onMenuSelect(signatureMeals.pescatarian);
+              widget.onMenuSelect(SignatureMeals.pescatarian);
               setState(() {
-                widget.activeMenu = signatureMeals.pescatarian;
+                widget.activeMenu = SignatureMeals.pescatarian;
               });
             },
             svgIcon: SvgPescatarian(
-                isActive: widget.activeMenu == signatureMeals.pescatarian),
+                isActive: widget.activeMenu == SignatureMeals.pescatarian),
             label: 'Pescetarian',
-            isActive: widget.activeMenu == signatureMeals.pescatarian,
+            isActive: widget.activeMenu == SignatureMeals.pescatarian,
           ),
         ],
       ),

@@ -5,7 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 class ProductsMenu extends StatelessWidget {
   const ProductsMenu({
     Key key,
+    this.onMenuSelect,
   }) : super(key: key);
+
+  final Function onMenuSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -18,30 +21,37 @@ class ProductsMenu extends StatelessWidget {
           ProductMenuButton(
             label: 'SIGNATURE MEALS',
             imgSrc: AssetImage('images/menu/signature.jpg'),
+            onMenuSelect: () => onMenuSelect(Products.signature),
           ),
           ProductMenuButton(
             label: 'HEALTHY DRINKS',
             imgSrc: AssetImage('images/menu/drinks.jpg'),
+            onMenuSelect: () => onMenuSelect(Products.drinks),
           ),
           ProductMenuButton(
             label: 'HEALTHY TREATS',
             imgSrc: AssetImage('images/menu/treats.jpg'),
+            onMenuSelect: () => onMenuSelect(Products.treats),
           ),
           ProductMenuButton(
             label: 'FROZEN PRODUCTS',
             imgSrc: AssetImage('images/menu/frozen.jpg'),
+            onMenuSelect: () => onMenuSelect(Products.frozen),
           ),
           ProductMenuButton(
             label: 'SPREAD & SAUCES',
             imgSrc: AssetImage('images/menu/spread.jpg'),
+            onMenuSelect: () => onMenuSelect(Products.spread),
           ),
           ProductMenuButton(
             label: 'PROTEIN ADD-ON',
             imgSrc: AssetImage('images/menu/add-on.jpg'),
+            onMenuSelect: () => onMenuSelect(Products.addon),
           ),
           ProductMenuButton(
             label: 'DETOX SOUP',
             imgSrc: AssetImage('images/menu/detox.jpg'),
+            onMenuSelect: () => onMenuSelect(Products.detox_soup),
           ),
         ],
       ),
@@ -61,10 +71,7 @@ class ProductMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(label + " selected");
-//        onMenuSelect(menu);
-//        this.onMenuSelect(signatureMeals.keto);
-//        Navigator.pop(context);
+        onMenuSelect();
       },
       child: Column(
         children: <Widget>[

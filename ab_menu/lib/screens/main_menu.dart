@@ -1,9 +1,8 @@
 import 'dart:async' show Future;
 import 'dart:convert';
 
-import 'package:ab_menu/components/product_grid_list.dart';
+import 'package:ab_menu/components/drinks_menu.dart';
 import 'package:ab_menu/components/products_menu.dart';
-import 'package:ab_menu/components/signature_menu.dart';
 import 'package:ab_menu/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -21,13 +20,18 @@ Future<List<dynamic>> loadProducts() async {
 
 class MenuScreen extends StatefulWidget {
   static const id = "menu";
-  MenuScreen({this.selectedMenu});
+  MenuScreen({
+    this.selectedMenu,
+    this.selectedProductFromMainScreen,
+  });
 
-  var selectedMenu = signatureMeals.keto;
+  final selectedProductFromMainScreen;
+  var selectedProduct;
+  var selectedMenu = SignatureMeals.keto;
+
+  // Grid source
   List activeProducts = [];
 //  List ketoMeals;
-
-  var SelectedProduct = "signature";
 
   @override
   _MenuScreenState createState() => _MenuScreenState();
@@ -45,7 +49,12 @@ class _MenuScreenState extends State<MenuScreen> {
     widget.activeProducts = signatureMealsProducts["keto"];
   }
 
-  _handleProductSelect(dynamic product) {}
+  _handleProductSelect(dynamic product) {
+    print("${product} selected");
+    setState(() {
+      widget.selectedProduct = product;
+    });
+  }
 
   _handleMenuSelect(dynamic menu) {
     setState(() {
@@ -53,8 +62,6 @@ class _MenuScreenState extends State<MenuScreen> {
       widget.activeProducts =
           signatureMealsProducts[menu.toString().split('.')[1]] ??
               signatureMealsProducts["keto"];
-
-//      signatureMealsProducts[menu] ?? signatureMealsProducts["keto"];
     });
   }
 
@@ -65,24 +72,27 @@ class _MenuScreenState extends State<MenuScreen> {
         body: Row(
 //          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ProductsMenu(),
+            ProductsMenu(
+              onMenuSelect: (Products product) =>
+                  this._handleProductSelect(product),
+            ),
             Expanded(
               child: Container(
                 color: Color(0xffD4D8DB),
                 child: Column(
                   children: <Widget>[
-                    SignatureMenu(
-                      onMenuSelect: (signatureMeals menu) =>
+                    DrinksMenu(
+                      onMenuSelect: (SignatureMeals menu) =>
                           this._handleMenuSelect(menu),
-                      activeMenu: widget.selectedMenu ?? signatureMeals.keto,
+                      activeMenu: widget.selectedMenu ?? SignatureMeals.keto,
                     ),
                     // bottom view
                     Expanded(
                       child: Column(
                         children: <Widget>[
-                          ProductGridList(
-                            source: widget.activeProducts,
-                          ),
+//                          ProductGridList(
+//                            source: widget.activeProducts,
+//                          ),
                         ],
                       ),
                     )
