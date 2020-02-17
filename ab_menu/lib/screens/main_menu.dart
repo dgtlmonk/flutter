@@ -45,8 +45,9 @@ class _MenuScreenState extends State<MenuScreen> {
     widget.activeProducts = signatureMealsProducts["keto"];
   }
 
+  _handleProductSelect(dynamic product) {}
+
   _handleMenuSelect(dynamic menu) {
-    print('menu select ' + menu.toString());
     setState(() {
       widget.selectedMenu = menu;
       widget.activeProducts =

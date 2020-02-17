@@ -3,7 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class ItemDetailCard extends StatelessWidget {
-  ItemDetailCard({this.item});
+  ItemDetailCard({
+    Key key,
+    this.item,
+  }) : super(key: key);
+
   final Map item;
 
   final currencyFormatter = NumberFormat('P#,###,###.00', 'en_PH');

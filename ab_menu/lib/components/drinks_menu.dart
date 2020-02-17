@@ -31,7 +31,7 @@ class _SignatureMenuState extends State<SignatureMenu> {
               });
             },
             svgIcon:
-                SvgColdBew(isActive: widget.activeMenu == signatureMeals.keto),
+                SvgKeto(isActive: widget.activeMenu == signatureMeals.keto),
             label: 'Healthy Keto',
             isActive: widget.activeMenu == signatureMeals.keto,
           ),

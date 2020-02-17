@@ -50,13 +50,11 @@ SvgPescatarian<Widget>({
       color: isActive ? kIconColorActive : kIconColor);
 }
 
-//class SVGWidget extends StatelessWidget {
-//  SVGWidget({this.isActive = false, this.tag});
-//  final bool isActive;
-//  final String tag;
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Container();
-//  }
-//}
+SvgColdBew<Widget>({
+  bool isActive = false,
+}) {
+  return SvgPicture.asset('images/svg/brew.svg',
+      width: kIconW,
+      height: kIconH,
+      color: isActive ? kIconColorActive : kIconColor);
+}

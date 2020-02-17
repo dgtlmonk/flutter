@@ -1,5 +1,6 @@
 import 'package:ab_menu/components/item_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductGridList extends StatelessWidget {
   const ProductGridList({
@@ -26,6 +27,7 @@ class ProductGridList extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return new ItemDetailCard(
+                      key: Key(new Uuid().v4()),
                       item: source[index],
                     );
                   },

@@ -17,6 +17,7 @@ dependencies:
   google_fonts: ^0.3.8
   flutter_svg: ^0.17.1
   intl: ^0.16.1
+  uuid: 2.0.4
 
 dev_dependencies:
   flutter_test:

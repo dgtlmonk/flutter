@@ -1,4 +1,3 @@
-import 'package:ab_menu/config/config.dart';
 import 'package:ab_menu/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,17 +50,21 @@ class ProductsMenu extends StatelessWidget {
 }
 
 class ProductMenuButton extends StatelessWidget {
-  ProductMenuButton({this.label, this.imgSrc});
+  ProductMenuButton({this.label, this.imgSrc, this.menu, this.onMenuSelect});
 
   final String label;
   final AssetImage imgSrc;
+  final Function onMenuSelect;
+  final dynamic menu;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('ok');
-        Navigator.pop(context);
+        print(label + " selected");
+//        onMenuSelect(menu);
+//        this.onMenuSelect(signatureMeals.keto);
+//        Navigator.pop(context);
       },
       child: Column(
         children: <Widget>[
