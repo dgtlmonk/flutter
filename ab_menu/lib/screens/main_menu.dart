@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:ab_menu/components/product_grid_list.dart';
 import 'package:ab_menu/components/products_menu.dart';
 import 'package:ab_menu/components/signature_menu.dart';
-import 'package:ab_menu/config/config.dart';
+import 'package:ab_menu/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 

@@ -1,4 +1,4 @@
-import 'package:ab_menu/config/config.dart';
+import 'package:ab_menu/constants.dart';
 import 'package:ab_menu/icons/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
