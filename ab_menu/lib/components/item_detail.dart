@@ -19,7 +19,7 @@ class ItemDetailCard extends StatelessWidget {
         child: Container(
           // SliverGrid handles the height?
 //          width: 350.0,
-          height: 100.0,
+//          height: 130.0,
           child: Column(
 //            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -28,7 +28,6 @@ class ItemDetailCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Container(
-//                height: 130.0,
                 padding: EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -9,8 +9,20 @@ enum SignatureMeals {
   balanced,
   pescatarian,
 }
-enum Drinks { cold_brew, milk_tea, lemon_aid }
-enum Products { signature, drinks, treats, frozen, spread, addon, detox_soup }
+enum Drinks {
+  cold_brew,
+  milk_tea,
+  lemon_aid,
+}
+enum Products {
+  signature,
+  drinks,
+  treats,
+  frozen,
+  spread,
+  addon,
+  detox_soup,
+}
 
 Map signatureMealsProducts = {
   'keto': healthyKeto,

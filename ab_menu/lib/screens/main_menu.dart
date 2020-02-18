@@ -2,6 +2,7 @@ import 'dart:async' show Future;
 import 'dart:convert';
 
 import 'package:ab_menu/components/drinks_menu.dart';
+import 'package:ab_menu/components/product_grid_list.dart';
 import 'package:ab_menu/components/products_menu.dart';
 import 'package:ab_menu/constants.dart';
 import 'package:flutter/material.dart';
@@ -90,9 +91,9 @@ class _MenuScreenState extends State<MenuScreen> {
                     Expanded(
                       child: Column(
                         children: <Widget>[
-//                          ProductGridList(
-//                            source: widget.activeProducts,
-//                          ),
+                          ProductGridList(
+                            source: widget.activeProducts,
+                          ),
                         ],
                       ),
                     )

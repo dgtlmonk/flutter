@@ -1,5 +1,6 @@
 import 'package:ab_menu/components/item_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductGridList extends StatelessWidget {
@@ -12,30 +13,24 @@ class ProductGridList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Flexible(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverPadding(
-              padding: EdgeInsets.all(20.0),
-              sliver: SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 30.0,
-                  crossAxisSpacing: 20.0,
-                  childAspectRatio: 1.1,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return new ItemDetailCard(
-                      key: Key(new Uuid().v4()),
-                      item: source[index],
-                    );
-                  },
-                  childCount: source.length,
-                ),
-              ),
-            ),
-          ],
+      child: Expanded(
+        child: new StaggeredGridView.count(
+          padding: EdgeInsets.all(8.0),
+          primary: false,
+          crossAxisCount: 6,
+          children: source.map<Widget>(
+            (item) {
+              return new ItemDetailCard(
+                  key: Key(
+                    new Uuid().v4(),
+                  ),
+                  item: item);
+            },
+          ).toList(),
+          staggeredTiles:
+              source.map<StaggeredTile>((_) => StaggeredTile.fit(2)).toList(),
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0,
         ),
       ),
     );
