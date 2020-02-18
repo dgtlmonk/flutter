@@ -14,6 +14,12 @@ enum Drinks {
   milk_tea,
   lemon_aid,
 }
+enum Treats {
+  cakes,
+  milk_tea,
+  protein_chips,
+}
+
 enum Products {
   signature,
   drinks,
@@ -31,3 +37,23 @@ Map signatureMealsProducts = {
   'detox': healthyDetox,
   'pescatarian': healthyPescatarian,
 };
+
+//child: ListView.builder(
+//scrollDirection: Axis.horizontal,
+//itemCount: treatsProducts.length,
+//itemBuilder: (BuildContext context, int index) {
+//return  ProductMenuButton(
+//onMenuTap: () {
+//widget.onMenuSelect(SignatureMeals.keto);
+//setState(() {
+//widget.activeMenu = SignatureMeals.keto;
+//});
+//},
+//svgIcon: SvgCake(
+//isActive: widget.activeMenu == SignatureMeals.keto,
+//),
+//label: 'Cakes',
+//isActive: widget.activeMenu == SignatureMeals.keto,
+//);
+//},
+//),

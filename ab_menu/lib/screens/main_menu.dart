@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:ab_menu/components/drinks_menu.dart';
 import 'package:ab_menu/components/product_grid_list.dart';
 import 'package:ab_menu/components/products_menu.dart';
+import 'package:ab_menu/components/signature_menu.dart';
+import 'package:ab_menu/components/treats_menu.dart';
 import 'package:ab_menu/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -50,8 +52,7 @@ class _MenuScreenState extends State<MenuScreen> {
     widget.activeProducts = signatureMealsProducts["keto"];
   }
 
-  _handleProductSelect(dynamic product) {
-    print("${product} selected");
+  _handleProductSelect(Products product) {
     setState(() {
       widget.selectedProduct = product;
     });
@@ -64,6 +65,28 @@ class _MenuScreenState extends State<MenuScreen> {
           signatureMealsProducts[menu.toString().split('.')[1]] ??
               signatureMealsProducts["keto"];
     });
+  }
+
+  _getProductMenu() {
+    switch (widget.selectedProduct) {
+      case Products.drinks:
+        return DrinksMenu(
+          onMenuSelect: (SignatureMeals menu) => this._handleMenuSelect(menu),
+          activeMenu: widget.selectedMenu ?? SignatureMeals.keto,
+        );
+
+      case Products.treats:
+        return TreatsMenu(
+          onMenuSelect: (SignatureMeals menu) => this._handleMenuSelect(menu),
+          activeMenu: widget.selectedMenu ?? SignatureMeals.keto,
+        );
+
+      default:
+        return SignatureMenu(
+          onMenuSelect: (SignatureMeals menu) => this._handleMenuSelect(menu),
+          activeMenu: widget.selectedMenu ?? SignatureMeals.keto,
+        );
+    }
   }
 
   @override
@@ -82,11 +105,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 color: Color(0xffD4D8DB),
                 child: Column(
                   children: <Widget>[
-                    DrinksMenu(
-                      onMenuSelect: (SignatureMeals menu) =>
-                          this._handleMenuSelect(menu),
-                      activeMenu: widget.selectedMenu ?? SignatureMeals.keto,
-                    ),
+                    _getProductMenu(),
                     // bottom view
                     Expanded(
                       child: Column(
