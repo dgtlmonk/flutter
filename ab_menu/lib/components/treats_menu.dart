@@ -1,15 +1,14 @@
 import 'package:ab_menu/components/product_menu_btn.dart';
-import 'package:ab_menu/config/ui/ui.dart';
-import 'package:ab_menu/constants.dart';
+import 'package:ab_menu/config/ui/menu.dart';
 import 'package:flutter/material.dart';
 
 class TreatsMenu extends StatefulWidget {
   TreatsMenu({
-    this.activeMenu = SignatureMeals.keto,
-    this.onMenuSelect,
+    this.activeMenu = "cakes",
+    this.onCategorySelect,
   });
   dynamic activeMenu;
-  final Function onMenuSelect;
+  final Function onCategorySelect;
 
   @override
   _TreatsMenuState createState() => _TreatsMenuState();
@@ -33,20 +32,21 @@ class _TreatsMenuState extends State<TreatsMenu> {
                 itemCount: treatsUIConfig.length,
                 itemBuilder: (BuildContext context, int index) {
                   String key = treatsUIConfig.keys.elementAt(index);
+                  print(key.toString());
 
                   return ProductMenuButton(
-                    onMenuTap: () {
-                      widget.onMenuSelect(SignatureMeals.keto);
-                      setState(() {
-                        widget.activeMenu = SignatureMeals.keto;
-                      });
-                    },
-                    svgIcon: treatsUIConfig[key]["icon"](
-                      isActive: widget.activeMenu == SignatureMeals.keto,
-                    ),
-                    label: treatsUIConfig[key]['label'],
-                    isActive: widget.activeMenu == SignatureMeals.keto,
-                  );
+                      onMenuTap: () {
+                        widget.onCategorySelect(treatsUIConfig[key]["key"]);
+                        setState(() {
+                          widget.activeMenu = treatsUIConfig[key]["key"];
+                        });
+                      },
+                      svgIcon: treatsUIConfig[key]["icon"](
+                          isActive:
+                              widget.activeMenu == treatsUIConfig[key]["key"]),
+                      label: treatsUIConfig[key]["label"],
+                      isActive:
+                          widget.activeMenu == treatsUIConfig[key]["key"]);
                 },
               ),
 

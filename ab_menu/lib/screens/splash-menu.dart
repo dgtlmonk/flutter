@@ -1,9 +1,16 @@
 import 'package:ab_menu/config/app.dart';
+import 'package:ab_menu/config/ui/menu.dart';
 import 'package:ab_menu/screens/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 final kBordeRadius = 15.0;
+
+class ScreenArguments {
+  final String productSelected;
+
+  ScreenArguments(this.productSelected);
+}
 
 class SplashMenu extends StatelessWidget {
   static const id = "carousel menu";
@@ -52,12 +59,18 @@ class SplashMenu extends StatelessWidget {
                     itemCount: 4,
                     itemHeight: 450.0,
                     itemWidth: 450.0,
-                    scale: .2,
+                    scale: .5,
                     layout: SwiperLayout.STACK,
                     pagination: new SwiperPagination(),
                     onTap: (int index) {
                       print("$index seleted");
-                      Navigator.pushNamed(context, MenuScreen.id);
+                      Navigator.pushNamed(
+                        context,
+                        MenuScreen.id,
+                        arguments: ScreenArguments(
+                          splashScreenUiConfig.keys.elementAt(index).toString(),
+                        ),
+                      );
                     },
                   ),
                 ),

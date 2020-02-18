@@ -4,9 +4,9 @@ import 'package:ab_menu/icons/svg.dart';
 import 'package:flutter/material.dart';
 
 class SignatureMenu extends StatefulWidget {
-  SignatureMenu({this.activeMenu = SignatureMeals.keto, this.onMenuSelect});
+  SignatureMenu({this.activeMenu = SignatureMeals.keto, this.onCategorySelect});
   dynamic activeMenu;
-  final Function onMenuSelect;
+  final Function onCategorySelect;
 
   @override
   _SignatureMenuState createState() => _SignatureMenuState();
@@ -29,7 +29,7 @@ class _SignatureMenuState extends State<SignatureMenu> {
                 children: <Widget>[
                   ProductMenuButton(
                     onMenuTap: () {
-                      widget.onMenuSelect(SignatureMeals.keto);
+                      widget.onCategorySelect(SignatureMeals.keto);
                       setState(() {
                         widget.activeMenu = SignatureMeals.keto;
                       });
@@ -43,7 +43,7 @@ class _SignatureMenuState extends State<SignatureMenu> {
                   ),
                   ProductMenuButton(
                       onMenuTap: () {
-                        widget.onMenuSelect(SignatureMeals.vegan);
+                        widget.onCategorySelect(SignatureMeals.vegan);
                         setState(() {
                           widget.activeMenu = SignatureMeals.vegan;
                         });
@@ -54,7 +54,7 @@ class _SignatureMenuState extends State<SignatureMenu> {
                       isActive: widget.activeMenu == SignatureMeals.vegan),
                   ProductMenuButton(
                     onMenuTap: () {
-                      widget.onMenuSelect(SignatureMeals.balanced);
+                      widget.onCategorySelect(SignatureMeals.balanced);
                       setState(() {
                         widget.activeMenu = SignatureMeals.balanced;
                       });
@@ -67,7 +67,7 @@ class _SignatureMenuState extends State<SignatureMenu> {
                   ),
                   ProductMenuButton(
                     onMenuTap: () {
-                      widget.onMenuSelect(SignatureMeals.detox);
+                      widget.onCategorySelect(SignatureMeals.detox);
                       setState(() {
                         widget.activeMenu = SignatureMeals.detox;
                       });
@@ -79,7 +79,7 @@ class _SignatureMenuState extends State<SignatureMenu> {
                   ),
                   ProductMenuButton(
                     onMenuTap: () {
-                      widget.onMenuSelect(SignatureMeals.pescatarian);
+                      widget.onCategorySelect(SignatureMeals.pescatarian);
                       setState(() {
                         widget.activeMenu = SignatureMeals.pescatarian;
                       });

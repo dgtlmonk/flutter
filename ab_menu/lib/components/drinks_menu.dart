@@ -4,9 +4,9 @@ import 'package:ab_menu/icons/svg.dart';
 import 'package:flutter/material.dart';
 
 class DrinksMenu extends StatefulWidget {
-  DrinksMenu({this.activeMenu = SignatureMeals.keto, this.onMenuSelect});
+  DrinksMenu({this.activeMenu = SignatureMeals.keto, this.onCategorySelect});
   dynamic activeMenu;
-  final Function onMenuSelect;
+  final Function onCategorySelect;
 
   @override
   _DrinksMenuState createState() => _DrinksMenuState();
@@ -28,7 +28,7 @@ class _DrinksMenuState extends State<DrinksMenu> {
                 children: <Widget>[
                   ProductMenuButton(
                     onMenuTap: () {
-                      widget.onMenuSelect(SignatureMeals.keto);
+                      widget.onCategorySelect(SignatureMeals.keto);
                       setState(() {
                         widget.activeMenu = SignatureMeals.keto;
                       });
@@ -42,7 +42,7 @@ class _DrinksMenuState extends State<DrinksMenu> {
                   ),
                   ProductMenuButton(
                       onMenuTap: () {
-                        widget.onMenuSelect(SignatureMeals.vegan);
+                        widget.onCategorySelect(SignatureMeals.vegan);
                         setState(() {
                           widget.activeMenu = SignatureMeals.vegan;
                         });
@@ -53,7 +53,7 @@ class _DrinksMenuState extends State<DrinksMenu> {
                       isActive: widget.activeMenu == SignatureMeals.vegan),
                   ProductMenuButton(
                     onMenuTap: () {
-                      widget.onMenuSelect(SignatureMeals.balanced);
+                      widget.onCategorySelect(SignatureMeals.balanced);
                       setState(() {
                         widget.activeMenu = SignatureMeals.balanced;
                       });
