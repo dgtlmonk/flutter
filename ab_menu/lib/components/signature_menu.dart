@@ -1,6 +1,6 @@
 import 'package:ab_menu/components/product_menu_btn.dart';
+import 'package:ab_menu/config/ui/menu.dart';
 import 'package:ab_menu/constants.dart';
-import 'package:ab_menu/icons/svg.dart';
 import 'package:flutter/material.dart';
 
 class SignatureMenu extends StatefulWidget {
@@ -24,73 +24,28 @@ class _SignatureMenuState extends State<SignatureMenu> {
             child: Container(
               // TODO: Make dynamic
               height: 160.0,
-              child: ListView(
+
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  ProductMenuButton(
-                    onMenuTap: () {
-                      widget.onCategorySelect(SignatureMeals.keto);
-                      setState(() {
-                        widget.activeMenu = SignatureMeals.keto;
-                      });
-                    },
-                    svgIcon: SvgKeto(
-                        isActive: widget.activeMenu == SignatureMeals.keto,
-                        width: 38.0,
-                        height: 70.0),
-                    label: 'Healthy Keto',
-                    isActive: widget.activeMenu == SignatureMeals.keto,
-                  ),
-                  ProductMenuButton(
+                itemCount: signatureUIConfig.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String key = signatureUIConfig.keys.elementAt(index);
+                  print(key.toString());
+
+                  return ProductMenuButton(
                       onMenuTap: () {
-                        widget.onCategorySelect(SignatureMeals.vegan);
+                        widget.onCategorySelect(signatureUIConfig[key]["key"]);
                         setState(() {
-                          widget.activeMenu = SignatureMeals.vegan;
+                          widget.activeMenu = signatureUIConfig[key]["key"];
                         });
                       },
-                      svgIcon: SvgVegan(
-                          isActive: widget.activeMenu == SignatureMeals.vegan),
-                      label: 'Healthy Vegan',
-                      isActive: widget.activeMenu == SignatureMeals.vegan),
-                  ProductMenuButton(
-                    onMenuTap: () {
-                      widget.onCategorySelect(SignatureMeals.balanced);
-                      setState(() {
-                        widget.activeMenu = SignatureMeals.balanced;
-                      });
-                    },
-                    svgIcon: SvgBalanced(
-                      isActive: widget.activeMenu == SignatureMeals.balanced,
-                    ),
-                    label: 'Balanced',
-                    isActive: widget.activeMenu == SignatureMeals.balanced,
-                  ),
-                  ProductMenuButton(
-                    onMenuTap: () {
-                      widget.onCategorySelect(SignatureMeals.detox);
-                      setState(() {
-                        widget.activeMenu = SignatureMeals.detox;
-                      });
-                    },
-                    svgIcon: SvgDetox(
-                        isActive: widget.activeMenu == SignatureMeals.detox),
-                    label: 'Detox Salads',
-                    isActive: widget.activeMenu == SignatureMeals.detox,
-                  ),
-                  ProductMenuButton(
-                    onMenuTap: () {
-                      widget.onCategorySelect(SignatureMeals.pescatarian);
-                      setState(() {
-                        widget.activeMenu = SignatureMeals.pescatarian;
-                      });
-                    },
-                    svgIcon: SvgPescatarian(
-                        isActive:
-                            widget.activeMenu == SignatureMeals.pescatarian),
-                    label: 'Pescetarian',
-                    isActive: widget.activeMenu == SignatureMeals.pescatarian,
-                  ),
-                ],
+                      svgIcon: signatureUIConfig[key]["icon"](
+                          isActive: widget.activeMenu ==
+                              signatureUIConfig[key]["key"]),
+                      label: signatureUIConfig[key]["label"],
+                      isActive:
+                          widget.activeMenu == signatureUIConfig[key]["key"]);
+                },
               ),
             ),
           ),

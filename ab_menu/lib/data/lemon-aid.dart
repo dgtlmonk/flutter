@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 
 const path = "images/products/milk-tea/";
-final coldBrew = [
+final lemonAid = [
   {
     "id": new Uuid().v4(),
     "name": "LemonAID (with Lemongrass)",

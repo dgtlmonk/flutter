@@ -1,8 +1,44 @@
 import 'package:ab_menu/data/cakes.dart';
 import 'package:ab_menu/data/cold-brew.dart';
+import 'package:ab_menu/data/keto.dart';
 import 'package:ab_menu/data/milk-tea.dart';
+import 'package:ab_menu/data/products.dart';
 import 'package:ab_menu/data/protein-chips.dart';
+import 'package:ab_menu/data/vegan.dart';
 import 'package:ab_menu/icons/svg.dart';
+
+Map signatureUIConfig = {
+  'keto': {
+    "label": 'Healthy Keto',
+    "data": signatureKeto,
+    "icon": SvgKeto,
+    "key": 'keto',
+  },
+  'vegan': {
+    "label": 'Healthy Vegan',
+    "data": signatureVegan,
+    "icon": SvgVegan,
+    "key": "vegan",
+  },
+  'balanced': {
+    "label": 'Balanced',
+    "data": healthyBalanced,
+    "icon": SvgBalanced,
+    "key": "balanced"
+  },
+  'detox': {
+    "label": 'Detox Salads',
+    "data": healthyDetox,
+    "icon": SvgDetox,
+    "key": "detox"
+  },
+  'perscatarian': {
+    "label": 'Pescetarian',
+    "data": healthyPescatarian,
+    "icon": SvgPescatarian,
+    "key": "pescatarian"
+  },
+};
 
 Map treatsUIConfig = {
   'cakes': {

@@ -1,6 +1,6 @@
 import 'package:ab_menu/components/product_menu_btn.dart';
+import 'package:ab_menu/config/ui/menu.dart';
 import 'package:ab_menu/constants.dart';
-import 'package:ab_menu/icons/svg.dart';
 import 'package:flutter/material.dart';
 
 class DrinksMenu extends StatefulWidget {
@@ -23,48 +23,28 @@ class _DrinksMenuState extends State<DrinksMenu> {
             child: Container(
               // TODO: Make dynamic
               height: 160.0,
-              child: ListView(
+
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  ProductMenuButton(
-                    onMenuTap: () {
-                      widget.onCategorySelect(SignatureMeals.keto);
-                      setState(() {
-                        widget.activeMenu = SignatureMeals.keto;
-                      });
-                    },
-                    svgIcon: SvgColdBew(
-                        isActive: widget.activeMenu == SignatureMeals.keto,
-                        width: 38.0,
-                        height: 70.0),
-                    label: 'Cold Brew',
-                    isActive: widget.activeMenu == SignatureMeals.keto,
-                  ),
-                  ProductMenuButton(
+                itemCount: drinksUIConfig.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String key = drinksUIConfig.keys.elementAt(index);
+                  print(key.toString());
+
+                  return ProductMenuButton(
                       onMenuTap: () {
-                        widget.onCategorySelect(SignatureMeals.vegan);
+                        widget.onCategorySelect(drinksUIConfig[key]["key"]);
                         setState(() {
-                          widget.activeMenu = SignatureMeals.vegan;
+                          widget.activeMenu = drinksUIConfig[key]["key"];
                         });
                       },
-                      svgIcon: SvgMilkTea(
-                          isActive: widget.activeMenu == SignatureMeals.vegan),
-                      label: 'Milk Tea',
-                      isActive: widget.activeMenu == SignatureMeals.vegan),
-                  ProductMenuButton(
-                    onMenuTap: () {
-                      widget.onCategorySelect(SignatureMeals.balanced);
-                      setState(() {
-                        widget.activeMenu = SignatureMeals.balanced;
-                      });
-                    },
-                    svgIcon: SvgLemonAid(
-                      isActive: widget.activeMenu == SignatureMeals.balanced,
-                    ),
-                    label: 'Lemon AID',
-                    isActive: widget.activeMenu == SignatureMeals.balanced,
-                  ),
-                ],
+                      svgIcon: drinksUIConfig[key]["icon"](
+                          isActive:
+                              widget.activeMenu == drinksUIConfig[key]["key"]),
+                      label: drinksUIConfig[key]["label"],
+                      isActive:
+                          widget.activeMenu == drinksUIConfig[key]["key"]);
+                },
               ),
             ),
           ),
