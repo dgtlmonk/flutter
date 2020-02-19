@@ -5,10 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 class ProductsMenu extends StatelessWidget {
   const ProductsMenu({
     Key key,
+    this.activeProduct,
     this.onMenuSelect,
   }) : super(key: key);
 
   final Function onMenuSelect;
+  final Products activeProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -21,43 +23,43 @@ class ProductsMenu extends StatelessWidget {
         padding: EdgeInsets.all(0.0),
         children: <Widget>[
           ProductMenuButton(
-            isActive: true,
+            isActive: activeProduct == Products.signature,
             label: 'SIGNATURE MEALS',
             imgSrc: AssetImage('images/menu/signature.jpg'),
             onMenuSelect: () => onMenuSelect(Products.signature),
           ),
           ProductMenuButton(
-            isActive: false,
+            isActive: activeProduct == Products.drinks,
             label: 'HEALTHY DRINKS',
             imgSrc: AssetImage('images/menu/drinks.jpg'),
             onMenuSelect: () => onMenuSelect(Products.drinks),
           ),
           ProductMenuButton(
-            isActive: false,
+            isActive: activeProduct == Products.treats,
             label: 'HEALTHY TREATS',
             imgSrc: AssetImage('images/menu/treats.jpg'),
             onMenuSelect: () => onMenuSelect(Products.treats),
           ),
           ProductMenuButton(
-            isActive: false,
+            isActive: activeProduct == Products.frozen,
             label: 'FROZEN PRODUCTS',
             imgSrc: AssetImage('images/menu/frozen.jpg'),
             onMenuSelect: () => onMenuSelect(Products.frozen),
           ),
           ProductMenuButton(
-            isActive: false,
+            isActive: activeProduct == Products.spreads,
             label: 'SPREAD & SAUCES',
             imgSrc: AssetImage('images/menu/spread.jpg'),
             onMenuSelect: () => onMenuSelect(Products.spreads),
           ),
           ProductMenuButton(
-            isActive: false,
+            isActive: activeProduct == Products.addon,
             label: 'PROTEIN ADD-ON',
             imgSrc: AssetImage('images/menu/add-on.jpg'),
             onMenuSelect: () => onMenuSelect(Products.addon),
           ),
           ProductMenuButton(
-            isActive: false,
+            isActive: activeProduct == Products.detox_soup,
             label: 'DETOX SOUP',
             imgSrc: AssetImage('images/menu/detox.jpg'),
             onMenuSelect: () => onMenuSelect(Products.detox_soup),

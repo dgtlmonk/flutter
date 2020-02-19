@@ -129,6 +129,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ProductsMenu(
               onMenuSelect: (Products product) =>
                   this._handleProductSelect(product),
+              activeProduct: widget.selectedProduct,
             ),
             Expanded(
               child: Container(
