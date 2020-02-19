@@ -29,7 +29,7 @@ final frozen = [
   },
   {
     "id": new Uuid().v4(),
-    "name": "Terderloin Steak",
+    "name": "Tenderloin Steak",
     "price": 3500,
     "macro": "Per kg",
   },

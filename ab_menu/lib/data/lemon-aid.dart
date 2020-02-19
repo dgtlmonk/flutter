@@ -1,6 +1,6 @@
 import 'package:uuid/uuid.dart';
 
-const path = "images/products/milk-tea/";
+const path = "images/products/lemon-aid/";
 final lemonAid = [
   {
     "id": new Uuid().v4(),
@@ -8,7 +8,7 @@ final lemonAid = [
     "price": 120,
     "macro":
         "Sugar-free, Keto/Vegan/Paleo friendly.\nAlkaline water, Lemon, Lemongrass, Stevia",
-//    "src": path + "taro.jpg"
+    "src": path + "lemon-grass.jpg"
   },
   {
     "id": new Uuid().v4(),
@@ -16,7 +16,7 @@ final lemonAid = [
     "price": 120,
     "macro":
         "Sugar-free, Keto/Vegan/Paleo friendly.\nAlkaline water, Lemon, Spirulina, Stevia",
-//    "src": path + "original.jpg"
+    "src": path + "spirulina.jpg"
   },
   {
     "id": new Uuid().v4(),
@@ -24,6 +24,6 @@ final lemonAid = [
     "price": 120,
     "macro":
         "Sugar-free, Keto/Vegan/Paleo friendly.\nAlkaline water, Lemon, Activated Charcoal, Stevia",
-//    "src": path + "matcha.jpg"
+    "src": path + "charcoal.jpg"
   },
 ];

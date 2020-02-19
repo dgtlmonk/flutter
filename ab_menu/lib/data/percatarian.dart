@@ -34,7 +34,7 @@ final signaturePescatarian = [
   },
   {
     "id": new Uuid().v4(),
-    "name": "Baked salmon with vegestable and quinoa",
+    "name": "Baked salmon with vegetable and quinoa",
     "price": 400,
     "macro": "373kcal (F 13g C 25g P 39g)\nSodium- 305mg",
   },

@@ -17,7 +17,7 @@ class ProductGridList extends StatelessWidget {
         child: new StaggeredGridView.count(
           padding: EdgeInsets.all(8.0),
           primary: false,
-          crossAxisCount: 6,
+          crossAxisCount: MediaQuery.of(context).size.width > 1000 ? 8 : 6,
           children: source.map<Widget>(
             (item) {
               return new ItemDetailCard(

@@ -1,14 +1,14 @@
 import 'package:uuid/uuid.dart';
 
-const path = "images/products/milk-tea/";
+const path = "images/products/cold-brew/";
 final coldBrew = [
   {
     "id": new Uuid().v4(),
-    "name": "Vanilla Hazelnul",
+    "name": "Vanilla Hazelnut",
     "price": 130,
     "macro":
         "A blend made from black cold coffee with lightly toasted hazelnut and vanilla to give full bodied rich flavor yet subtle and complex taste.",
-//    "src": path + "taro.jpg"
+    "src": path + "vanilla.jpg"
   },
   {
     "id": new Uuid().v4(),
@@ -16,14 +16,14 @@ final coldBrew = [
     "price": 130,
     "macro":
         "Made from pure black cold brew coffee with ghana cacao and ceylon cinnamon.",
-//    "src": path + "original.jpg"
+    "src": path + "mexican.jpg"
   },
   {
     "id": new Uuid().v4(),
     "name": "Black",
-    "price": 220,
+    "price": 110,
     "macro":
         "Not your ordinary classic black. A smooth and flavorful taste with notes of caramel and chocolate.",
-//    "src": path + "matcha.jpg"
+    "src": path + "black.jpg"
   },
 ];

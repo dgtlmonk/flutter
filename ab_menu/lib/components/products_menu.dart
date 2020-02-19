@@ -96,10 +96,6 @@ class ProductMenuButton extends StatelessWidget {
         },
         child: Container(
           color: isActive ? Color(0xFFd35127) : Colors.transparent,
-          margin: EdgeInsets.only(
-//            top: _kMargin,
-//            bottom: _kMargin,
-              ),
           padding: EdgeInsets.only(
             top: _kMargin,
             bottom: _kMargin,
