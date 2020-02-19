@@ -41,10 +41,6 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   _setActiveProducts(Products product) {
     final productName = product.toString().split('.')[1];
-//    print(ProductList[]
-//        .values
-//        .elementAt(0)
-//        .toString());
 
     setState(() {
       widget.activeProductLists = ProductList[productName].values.elementAt(0);
@@ -61,8 +57,12 @@ class _MenuScreenState extends State<MenuScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.activeProductLists = ProductList["signature"]["keto"];
-    widget.selectedProduct = Products.signature;
+
+    new Future.delayed(Duration.zero, () {
+      final ScreenArguments args = ModalRoute.of(context).settings.arguments;
+      widget.selectedProduct = args.productSelected;
+      _setActiveProducts(args.productSelected);
+    });
   }
 
   _handleProductSelect(Products product) {
@@ -109,8 +109,6 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
-
 //    print('args ' + args.productSelected);
 //    widget.selectedProduct = args.productSelected ?? Products.signature;
     return Scaffold(
