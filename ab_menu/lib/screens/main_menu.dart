@@ -5,9 +5,10 @@ import 'package:ab_menu/components/drinks_menu.dart';
 import 'package:ab_menu/components/product_grid_list.dart';
 import 'package:ab_menu/components/products_menu.dart';
 import 'package:ab_menu/components/signature_menu.dart';
+import 'package:ab_menu/components/spreads.dart';
 import 'package:ab_menu/components/treats_menu.dart';
-import 'package:ab_menu/config/ui/menu.dart';
 import 'package:ab_menu/constants.dart';
+import 'package:ab_menu/data/products.dart';
 import 'package:ab_menu/screens/splash-menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -55,7 +56,6 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     new Future.delayed(Duration.zero, () {
@@ -88,29 +88,39 @@ class _MenuScreenState extends State<MenuScreen> {
         return DrinksMenu(
           onCategorySelect: (String category) =>
               this._handleCategorySelect(category),
-          activeMenu: widget.selectedCategory ?? SignatureMeals.keto,
+          activeMenu: widget.selectedCategory,
         );
 
       case Products.treats:
         return TreatsMenu(
           onCategorySelect: (String category) =>
               this._handleCategorySelect(category),
-          activeMenu: widget.selectedCategory ?? treatsUIConfig["cakes"]["key"],
+          activeMenu: widget.selectedCategory,
         );
 
       case Products.signature:
         return SignatureMenu(
           onCategorySelect: (String category) =>
               this._handleCategorySelect(category),
-          activeMenu: widget.selectedCategory ?? SignatureMeals.keto,
+          activeMenu: widget.selectedCategory,
+        );
+
+      case Products.spreads:
+        return SpreadsMenu(
+          onCategorySelect: (String category) =>
+              this._handleCategorySelect(category),
+          activeMenu: widget.selectedCategory,
+        );
+
+      default:
+        return SizedBox(
+          height: 0,
         );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-//    print('args ' + args.productSelected);
-//    widget.selectedProduct = args.productSelected ?? Products.signature;
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Row(

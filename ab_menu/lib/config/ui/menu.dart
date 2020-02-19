@@ -1,10 +1,13 @@
 import 'package:ab_menu/constants.dart';
+import 'package:ab_menu/data/balanced.dart';
 import 'package:ab_menu/data/cakes.dart';
 import 'package:ab_menu/data/cold-brew.dart';
+import 'package:ab_menu/data/detox.dart';
 import 'package:ab_menu/data/keto.dart';
 import 'package:ab_menu/data/lemon-aid.dart';
 import 'package:ab_menu/data/milk-tea.dart';
-import 'package:ab_menu/data/products.dart';
+import 'package:ab_menu/data/peanut-butter.dart';
+import 'package:ab_menu/data/percatarian.dart';
 import 'package:ab_menu/data/protein-chips.dart';
 import 'package:ab_menu/data/vegan.dart';
 import 'package:ab_menu/icons/svg.dart';
@@ -24,19 +27,19 @@ Map signatureUIConfig = {
   },
   'balanced': {
     "label": 'Balanced',
-    "data": healthyBalanced,
+    "data": signatureBalanced,
     "icon": SvgBalanced,
     "key": "balanced"
   },
   'detox': {
     "label": 'Detox Salads',
-    "data": healthyDetox,
+    "data": signatureDetox,
     "icon": SvgDetox,
     "key": "detox"
   },
   'perscatarian': {
     "label": 'Pescetarian',
-    "data": healthyPescatarian,
+    "data": signaturePescatarian,
     "icon": SvgPescatarian,
     "key": "pescatarian"
   },
@@ -81,6 +84,15 @@ Map drinksUIConfig = {
     "data": lemonAid,
     "icon": SvgProteinChips,
     "key": "lemon_aid"
+  },
+};
+
+Map spreadsUIConfig = {
+  'peanut_butter': {
+    "label": 'Peanut Butter',
+    "data": peanutButter,
+    "icon": SvgPeanutButter,
+    "key": 'peanut_butter',
   },
 };
 

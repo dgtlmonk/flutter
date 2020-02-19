@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 const kIconW = 44.0;
 const kIconH = 76.0;
 
-const kIconColor = Color(0xFFd35127); // Colors.white;
+const kIconColor = Color(0xFFd35127);
 const kIconColorActive = Colors.white;
 
 SvgPicture _generateSVGIcon(
@@ -56,4 +56,9 @@ SvgPescatarian<Widget>({bool isActive = false, double width, double height}) {
 
 SvgColdBew<Widget>({bool isActive = false, double width, double height}) {
   return _generateSVGIcon('images/svg/brew.svg', isActive, width, height);
+}
+
+SvgPeanutButter<Widget>({bool isActive = false, double width, double height}) {
+  return _generateSVGIcon(
+      'images/svg/peanut-butter.svg', isActive, width, height);
 }
