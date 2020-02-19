@@ -39,16 +39,16 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  _setActiveProduct(Products product) {
-    print(ProductList[product.toString().split('.')[1]]
-        .values
-        .elementAt(0)
-        .toString());
+  _setActiveProducts(Products product) {
+    final productName = product.toString().split('.')[1];
+//    print(ProductList[]
+//        .values
+//        .elementAt(0)
+//        .toString());
 
-    final _product =
-        ProductList[product.toString().split('.')[1]].values.elementAt(0);
     setState(() {
-      widget.activeProductLists = _product;
+      widget.activeProductLists = ProductList[productName].values.elementAt(0);
+      widget.selectedCategory = ProductList[productName].keys.elementAt(0);
     });
   }
 
@@ -71,7 +71,7 @@ class _MenuScreenState extends State<MenuScreen> {
       widget.selectedProduct = product;
     });
 
-    _setActiveProduct(product);
+    _setActiveProducts(product);
   }
 
   _handleCategorySelect(String category) {
@@ -111,16 +111,8 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
 
-    print('args ' + args.productSelected.toString());
+//    print('args ' + args.productSelected);
 //    widget.selectedProduct = args.productSelected ?? Products.signature;
-
-    if (widget.selectedProduct == null) {
-      setState(() {
-        widget.selectedProduct = args.productSelected;
-      });
-    }
-
-    _setActiveProduct(widget.selectedProduct);
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Row(
@@ -141,7 +133,8 @@ class _MenuScreenState extends State<MenuScreen> {
                       child: Column(
                         children: <Widget>[
                           ProductGridList(
-                            source: widget.activeProductLists,
+                            source: widget.activeProductLists ??
+                                ProductList["signature"]["keto"],
                           ),
                         ],
                       ),
