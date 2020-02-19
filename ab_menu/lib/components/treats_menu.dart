@@ -31,7 +31,6 @@ class _TreatsMenuState extends State<TreatsMenu> {
                 itemCount: treatsUIConfig.length,
                 itemBuilder: (BuildContext context, int index) {
                   String key = treatsUIConfig.keys.elementAt(index);
-                  print(key.toString());
 
                   return ProductMenuButton(
                       onMenuTap: () {

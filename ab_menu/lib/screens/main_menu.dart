@@ -34,22 +34,35 @@ class MenuScreen extends StatefulWidget {
 
   // Grid source
   List activeProductLists = [];
-
   @override
   _MenuScreenState createState() => _MenuScreenState();
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+  _setActiveProduct(Products product) {
+    print(ProductList[product.toString().split('.')[1]]
+        .values
+        .elementAt(0)
+        .toString());
+
+    final _product =
+        ProductList[product.toString().split('.')[1]].values.elementAt(0);
+    setState(() {
+      widget.activeProductLists = _product;
+    });
+  }
+
+  _getProducts() {
+    return ProductList[widget.selectedProduct.toString().split('.')[1]]
+        [widget.selectedCategory];
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-//    print("init called " + widget.selectedProduct.toString());
-//    loadProducts().then((List<dynamic> products) {
-//      var _signatureMeals =
-//          products.where((product) => product["name"] == "Signature Meals");
-//    });
-    widget.activeProductLists = signatureMealsProducts["keto"];
+    widget.activeProductLists = ProductList["signature"]["keto"];
+    widget.selectedProduct = Products.signature;
   }
 
   _handleProductSelect(Products product) {
@@ -57,16 +70,15 @@ class _MenuScreenState extends State<MenuScreen> {
     setState(() {
       widget.selectedProduct = product;
     });
+
+    _setActiveProduct(product);
   }
 
   _handleCategorySelect(String category) {
     print(category.toString() + " selected ");
     setState(() {
       widget.selectedCategory = category;
-      // widget.productList = widget.selectedProduct["category"]["data"]
-//      widget.activeProducts =
-//          signatureMealsProducts[menu.toString().split('.')[1]] ??
-//          menu.toString() ?? signatureMealsProducts["keto"];
+      widget.activeProductLists = _getProducts();
     });
   }
 
@@ -86,7 +98,7 @@ class _MenuScreenState extends State<MenuScreen> {
           activeMenu: widget.selectedCategory ?? treatsUIConfig["cakes"]["key"],
         );
 
-      default:
+      case Products.signature:
         return SignatureMenu(
           onCategorySelect: (String category) =>
               this._handleCategorySelect(category),
@@ -99,8 +111,16 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
 
-    print(args.productSelected.toString());
+    print('args ' + args.productSelected.toString());
+//    widget.selectedProduct = args.productSelected ?? Products.signature;
 
+    if (widget.selectedProduct == null) {
+      setState(() {
+        widget.selectedProduct = args.productSelected;
+      });
+    }
+
+    _setActiveProduct(widget.selectedProduct);
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Row(

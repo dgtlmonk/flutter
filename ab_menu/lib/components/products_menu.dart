@@ -42,7 +42,7 @@ class ProductsMenu extends StatelessWidget {
           ProductMenuButton(
             label: 'SPREAD & SAUCES',
             imgSrc: AssetImage('images/menu/spread.jpg'),
-            onMenuSelect: () => onMenuSelect(Products.spread),
+            onMenuSelect: () => onMenuSelect(Products.spreads),
           ),
           ProductMenuButton(
             label: 'PROTEIN ADD-ON',

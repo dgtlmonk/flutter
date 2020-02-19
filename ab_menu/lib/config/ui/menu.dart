@@ -1,6 +1,8 @@
+import 'package:ab_menu/constants.dart';
 import 'package:ab_menu/data/cakes.dart';
 import 'package:ab_menu/data/cold-brew.dart';
 import 'package:ab_menu/data/keto.dart';
+import 'package:ab_menu/data/lemon-aid.dart';
 import 'package:ab_menu/data/milk-tea.dart';
 import 'package:ab_menu/data/products.dart';
 import 'package:ab_menu/data/protein-chips.dart';
@@ -76,23 +78,27 @@ Map drinksUIConfig = {
   },
   'lemon_aid': {
     "label": 'Lemon AID',
-    "data": proteinChips,
+    "data": lemonAid,
     "icon": SvgProteinChips,
-    "key": "protein_chips"
+    "key": "lemon_aid"
   },
 };
 
 Map splashScreenUiConfig = {
   'signature': {
+    "key": Products.signature,
     "src": "cover-0.jpg",
   },
   'treats': {
+    "key": Products.treats,
     "src": "cover-1.jpg",
   },
   'frozen': {
+    "key": Products.frozen,
     "src": "cover-2.jpg",
   },
   'spreads': {
+    "key": Products.spreads,
     "src": "cover-3.jpg",
   },
 };

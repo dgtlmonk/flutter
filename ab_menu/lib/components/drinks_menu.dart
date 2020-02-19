@@ -29,7 +29,6 @@ class _DrinksMenuState extends State<DrinksMenu> {
                 itemCount: drinksUIConfig.length,
                 itemBuilder: (BuildContext context, int index) {
                   String key = drinksUIConfig.keys.elementAt(index);
-                  print(key.toString());
 
                   return ProductMenuButton(
                       onMenuTap: () {

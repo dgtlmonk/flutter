@@ -1,5 +1,6 @@
 import 'package:ab_menu/config/app.dart';
 import 'package:ab_menu/config/ui/menu.dart';
+import 'package:ab_menu/constants.dart';
 import 'package:ab_menu/screens/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 final kBordeRadius = 15.0;
 
 class ScreenArguments {
-  final String productSelected;
+  final Products productSelected;
 
   ScreenArguments(this.productSelected);
 }
@@ -68,7 +69,7 @@ class SplashMenu extends StatelessWidget {
                         context,
                         MenuScreen.id,
                         arguments: ScreenArguments(
-                          splashScreenUiConfig.keys.elementAt(index).toString(),
+                          splashScreenUiConfig.values.elementAt(index)["key"],
                         ),
                       );
                     },

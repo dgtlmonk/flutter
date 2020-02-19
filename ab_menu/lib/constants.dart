@@ -30,7 +30,7 @@ enum Products {
   drinks,
   treats,
   frozen,
-  spread,
+  spreads,
   addon,
   detox_soup,
 }
@@ -51,7 +51,7 @@ Map ProductList = {
     "detox": healthyDetox,
     "pescatarian": healthyPescatarian,
   },
-  "drink": {
+  "drinks": {
     "cold_brew": coldBrew,
     "milk_tea": milkTea,
     "lemon_aid": lemonAid,

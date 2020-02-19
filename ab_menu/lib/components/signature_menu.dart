@@ -30,7 +30,6 @@ class _SignatureMenuState extends State<SignatureMenu> {
                 itemCount: signatureUIConfig.length,
                 itemBuilder: (BuildContext context, int index) {
                   String key = signatureUIConfig.keys.elementAt(index);
-                  print(key.toString());
 
                   return ProductMenuButton(
                       onMenuTap: () {
